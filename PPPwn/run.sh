@@ -134,6 +134,6 @@ do
  	echo -e "\033[31m\nInterface $INTERFACE not found\033[0m\n" | sudo tee /dev/tty1
  	exit 1
  fi
-done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGE1//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGE1.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGE1.bin")
+done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGE1//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGE1.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGE2.bin")
 coproc read -t 1 && wait "$!" || true
 done
