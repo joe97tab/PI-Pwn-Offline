@@ -15,10 +15,10 @@ When goldhen release for new firmware, replace new stage2_xx.xx.bin in /firmware
 
 Raspberry pi offline image :
 
-https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view
+https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view
 
 Armbian amlogic s9xx offline image :
 
-https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view
+https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view
 
 Credit to anyone that made it worked.
