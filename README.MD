@@ -7,9 +7,15 @@ No need to install additional software.
 
 Current goldhen support       (FW) : 9.00, [10.00, 10.01], 11.00
 
+https://github.com/GoldHEN/GoldHEN/releases
+
 Current hen (BestPig) support (FW) : [10.50, 10.70, 10.71], 11.00
 
+https://github.com/BestPig/ps4-hen-vtx/releases
+
 Current hen support           (FW) : [8.00, 8.01, 8.03], [9.03, 9.04], [9.50, 9.51, 9.60], [10.50, 10.70, 10.71], 11.00
+
+https://github.com/EchoStretch/ps4-hen-vtx/releases
 
 Current pppwn support         (FW) : 7.00 - 11.00
 
