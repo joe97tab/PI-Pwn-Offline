@@ -21,4 +21,4 @@ Armbian amlogic s9xx offline image :
 
 https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view
 
-Credit too anyone that made it worked.
+Credit to anyone that made it worked.
