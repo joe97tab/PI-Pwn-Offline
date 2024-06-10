@@ -1,6 +1,9 @@
 I modify the script to using for OFFLINE mode.
+
 Test on PS4 Slim FW 10.50, Raspberry pi 2 and Sunvell T95m S905 TV Box.
+
 It can use with raspberry pi, linux system and armbian devices (tested on TV Box).
+
 No need to install additional software.
 
 ---------------------------------------------------------------------------------------
