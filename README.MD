@@ -7,11 +7,13 @@ No need to install additional software.
 
 Current goldhen support (FW) : 9.00, [10.00, 10.01], 11.00
 
-Current hen support     (FW) : [10.50, 10.70, 10.71]
+Current hen support     (FW) : [8.00, 8.01, 8.03], [9.03, 9.04], [9.50, 9.51, 9.60], [10.50, 10.70, 10.71], 11.00
 
-Current pppwn support   (FW) : 9.00 - 11.00 (Below FW also support).
+Current pppwn support   (FW) : 7.00 - 11.00
 
-When goldhen release for new firmware, replace new stage2_xx.xx.bin in /firmware/PPPwn/.
+I provided some bin files for your test in folder /stage2/, replace new stage2_xx.xx.bin in /firmware/PPPwn/ to match your firmware.
+
+When pwn don't touch anything will increase the success rate.
 
 Raspberry pi offline image :
 
