@@ -9,8 +9,6 @@ echo -e '\033[37mGoldhen by          : SiSTR0\033[0m'
 echo -e '\033[37mOriginal Script     : Stooged\033[0m'
 echo -e '\033[37mC++ Port            : xfangfang\033[0m'
 echo -e '\033[37mMod By              : joe97tab\033[0m'
-echo -e '\033[37mGoldhen Support     : FW 9.00, [10.00, 10.01], 11.00\033[0m'
-echo -e '\033[37mPPPwn Support       : FW 9.00 to 11.00\033[0m'
 
 while true; do
 read -p "$(printf '\r\n\r\n\033[37mDo you want the device to shutdown after pwn success\r\n\r\n\033[37m(Y|N)?: \033[0m')" pisht
@@ -43,25 +41,31 @@ esac
 done
 
 echo -e ''
+echo -e '\033[37mInput [11.00] for FW 11.00\033[0m'
 echo -e '\033[37mInput [10.50] for FW 10.50, 10.70, 10.71\033[0m'
 echo -e '\033[37mInput [10.00] for FW 10.00, 10.01\033[0m'
-echo -e '\033[37mInput [9.60]  for FW 9.50, 9.51, 9.60\033[0m'
+echo -e '\033[37mInput [9.50]  for FW 9.50, 9.51, 9.60\033[0m'
 echo -e '\033[37mInput [9.03]  for FW 9.03, 9.04\033[0m'
+echo -e '\033[37mInput [9.00]  for FW 9.00\033[0m'
+echo -e '\033[37mInput [8.50]  for FW 8.50, 8.52\033[0m'
+echo -e '\033[37mInput [8.00]  for FW 8.00, 8.01, 8.03\033[0m'
+echo -e '\033[37mInput [7.50]  for FW 7.50, 7.51, 7.55\033[0m'
+echo -e '\033[37mInput [7.00]  for FW 7.00, 7.01, 7.02\033[0m'
 
 while true; do
 read -p "$(printf '\r\n\r\n\033[37mWould you like to change the firmware version being used, the default is 11.00\r\n\r\n\033[37m(Y|N)?: \033[0m')" fwset
 case $fwset in
 [Yy]* ) 
 while true; do
-read -p  "$(printf '\033[37mEnter the firmware version [11.00 | 10.50 | 10.00 | 9.60 | 9.03 | 9.00]: \033[0m')" FWV
+read -p  "$(printf '\033[37mEnter the firmware version [11.00 | 10.50 | 10.00 | 9.50 | 9.03 | 9.00 | 8.50 | 8.00 | 7.50 | 7.00]: \033[0m')" FWV
 case $FWV in
 "" ) 
  echo -e '\033[31mCannot be empty!\033[0m';;
  * )  
 if grep -q '^[0-9.]*$' <<<$FWV ; then 
 
-if [[ ! "$FWV" =~ ^("11.00"|"10.50"|"10.00"|"9.60"|"9.03"|"9.00")$ ]]  ; then
-echo -e '\033[37mThe version must be 11.00, 10.50, 10.00, 9.60, 9.03 or 9.00\033[0m';
+if [[ ! "$FWV" =~ ^("11.00"|"10.50"|"10.00"|"9.50"|"9.03"|"9.00"|"8.50"|"8.00"|"7.50"|"7.00")$ ]]  ; then
+echo -e '\033[37mThe version must be 11.00, 10.50, 10.00, 9.50, 9.03, 9.00, 8.50, 8.00, 7.50 or 7.00\033[0m';
 else 
 break;
 fi
