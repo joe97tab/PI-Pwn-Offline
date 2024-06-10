@@ -3,46 +3,25 @@
 if [ -f /boot/firmware/PPPwn/config.sh ]; then
 source /boot/firmware/PPPwn/config.sh
 fi
-#eth0, eth1, end0, etc.
 if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
-#[7.00, 7.01, 7.02] [7.50, 7.51, 7.55] [8.00, 8.01, 8.03] [8.50, 8.52] 9.00 [9.03, 9.04] [9.50, 9.51, 9.60] [10.00, 10.01] [10.50, 10.70, 10.71] 11.00
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="10.50"; fi
 if [ -z $SHUTDOWN ]; then SHUTDOWN=true; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
 if [ -z $TIMEOUT ]; then TIMEOUT="5m"; fi
 
-#Correct FW for pppwn, if no goldhen it will use normal pppwn
-#prepare for hen-vtx.
+#Correct FW for pppwn
 if [[ $FIRMWAREVERSION == "10.50" || $FIRMWAREVERSION == "10.70" || $FIRMWAREVERSION == "10.71" ]] ;then
-STAGEONE="10.50"
-STAGETWO="10.50"
+STAGEVER="10.50"
 elif [[ $FIRMWAREVERSION == "10.00" || $FIRMWAREVERSION == "10.01" ]] ;then
-STAGEONE="10.00"
-STAGETWO="10.00"
+STAGEVER="10.00"
 elif [[ $FIRMWAREVERSION == "9.50" || $FIRMWAREVERSION == "9.51" || $FIRMWAREVERSION == "9.60" ]] ;then
-STAGEONE="9.50"
-STAGETWO="9.50"
+STAGEVER="9.60"
 elif [[ $FIRMWAREVERSION == "9.03" || $FIRMWAREVERSION == "9.04" ]] ;then
-STAGEONE="9.03"
-STAGETWO="9.03"
+STAGEVER="9.03"
 elif [[ $FIRMWAREVERSION == "9.00" ]] ;then
-STAGEONE="9.00"
-STAGETWO="9.00"
-elif [[ $FIRMWAREVERSION == "8.50" || $FIRMWAREVERSION == "8.52" ]] ;then
-STAGEONE="8.50"
-STAGETWO="8.50"
-elif [[ $FIRMWAREVERSION == "8.00" || $FIRMWAREVERSION == "8.01" || $FIRMWAREVERSION == "8.03" ]] ;then
-STAGEONE="8.00"
-STAGETWO="8.00"
-elif [[ $FIRMWAREVERSION == "7.50" || $FIRMWAREVERSION == "7.51" || $FIRMWAREVERSION == "7.55" ]] ;then
-STAGEONE="7.50"
-STAGETWO="7.50"
-elif [[ $FIRMWAREVERSION == "7.00" || $FIRMWAREVERSION == "7.01" || $FIRMWAREVERSION == "7.02" ]] ;then
-STAGEONE="7.00"
-STAGETWO="7.00"
+STAGEVER="9.00"
 else
-STAGEONE="11.00"
-STAGETWO="11.00"
+STAGEVER="11.00"
 fi
 
 if [ $USBETHERNET = true ] ; then
@@ -96,12 +75,12 @@ echo -e "\033[37mMod By          : joe97tab\033[0m" | sudo tee /dev/tty1
 
 sudo systemctl stop pppoe
 if [ $USBETHERNET = true ] ; then
-	echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/unbind
-	coproc read -t 2 && wait "$!" || true
-	echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind
-	coproc read -t 5 && wait "$!" || true
+	echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/unbind >/dev/null
+	coproc read -t 1 && wait "$!" || true
+	echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind >/dev/null
+	coproc read -t 4 && wait "$!" || true
 	sudo ip link set $INTERFACE up
-else
+   else	
 	sudo ip link set $INTERFACE down
 	coproc read -t 5 && wait "$!" || true
 	sudo ip link set $INTERFACE up
@@ -134,6 +113,6 @@ do
  	echo -e "\033[31m\nInterface $INTERFACE not found\033[0m\n" | sudo tee /dev/tty1
  	exit 1
  fi
-done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGEONE//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGEONE.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGETWO.bin")
+done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGEVER//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGEVER.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGEVER.bin")
 coproc read -t 1 && wait "$!" || true
 done
