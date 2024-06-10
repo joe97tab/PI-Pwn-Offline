@@ -1,6 +1,6 @@
 I modify the script to using for OFFLINE mode.
 
-Test on PS4 Slim FW 10.50.
+Test on PS4 Slim FW 10.50, Raspberry pi 2 and Sunvell T95m S905 TV Box.
 
 It can use with raspberry pi, linux system and armbian devices (tested on TV Box).
 No need to install additional software.
@@ -13,7 +13,7 @@ Current pppwn support   (FW) : 7.00 - 11.00
 
 I provided some bin files for your test in folder /stage2/, replace new stage2_xx.xx.bin in /firmware/PPPwn/ to match your firmware.
 
-When pwn don't touch anything will increase the success rate.
+When pwn the console don't touch anything it will increase the success rate.
 
 Raspberry pi offline image :
 
