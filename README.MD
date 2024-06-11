@@ -10,39 +10,39 @@ No need to install additional software.
 
 ---------------------------------------------------------------------------------------
 
-Current goldhen support       (FW) : 9.00, [10.00, 10.01], 11.00
+- Current goldhen support       (FW) : 9.00, [10.00, 10.01], 11.00
 
-https://github.com/GoldHEN/GoldHEN/releases
+[GoldHEN](https://github.com/GoldHEN/GoldHEN/releases)
 
-Current hen (BestPig) support (FW) : [10.50, 10.70, 10.71], 11.00
+- Current hen (BestPig) support (FW) : [10.50, 10.70, 10.71], 11.00
 
-https://github.com/BestPig/ps4-hen-vtx/releases
+[BestPig](https://github.com/BestPig/ps4-hen-vtx/releases)
 
-Current hen support           (FW) : [8.00, 8.01, 8.03], [9.03, 9.04], [9.50, 9.51, 9.60], [10.50, 10.70, 10.71], 11.00
+- Current hen support           (FW) : [8.00, 8.01, 8.03], [9.03, 9.04], [9.50, 9.51, 9.60], [10.50, 10.70, 10.71], 11.00
 
-https://github.com/EchoStretch/ps4-hen-vtx/releases
+[hen-vtx](https://github.com/EchoStretch/ps4-hen-vtx/releases)
 
-Current pppwn support         (FW) : 7.00 - 11.00
+- Current pppwn support         (FW) : 7.00 - 11.00
 
-`stage2_7.00.bin =` FW 7.00 / 7.01 / 7.02
+`stage2_7.00.bin` = FW 7.00 / 7.01 / 7.02
 
-`stage2_7.50.bin =` FW 7.50 / 7.51 / 7.55
+`stage2_7.50.bin` = FW 7.50 / 7.51 / 7.55
 
-`stage2_8.00.bin =` FW 8.00 / 8.01 / 8.03
+`stage2_8.00.bin` = FW 8.00 / 8.01 / 8.03
 
-`stage2_8.50.bin =` FW 8.50 / 8.52
+`stage2_8.50.bin` = FW 8.50 / 8.52
 
-`stage2_9.00.bin =` FW 9.00
+`stage2_9.00.bin` = FW 9.00
 
-`stage2_9.03.bin =` FW 9.03 / 9.04
+`stage2_9.03.bin` = FW 9.03 / 9.04
 
-`stage2_9.50.bin =` FW 9.50 / 9.51 / 9.60
+`stage2_9.50.bin` = FW 9.50 / 9.51 / 9.60
 
-`stage2_10.00.bin =` FW 10.00 / 10.01
+`stage2_10.00.bin` = FW 10.00 / 10.01
 
-`stage2_10.50.bin =` FW 10.50 / 10.70 / 10.71
+`stage2_10.50.bin` = FW 10.50 / 10.70 / 10.71
 
-`stage2_11.00.bin =` FW 11.00
+`stage2_11.00.bin` = FW 11.00
 
 I provided some bin files for your test in folder /stage2/, replace new stage2_xx.xx.bin in /firmware/PPPwn/ to match your firmware.
 
@@ -81,6 +81,16 @@ sudo bash /boot/firmware/tuning/speedup_armbian.sh
 
 Shut down and connect to ps4 and test your pppwn.
 
+On your PS4:
+
+- Go to `Settings` and then `Network`
+- Select `Set Up Internet connection` and choose `Use a LAN Cable`
+- Choose `Custom` setup and choose `PPPoE` for `IP Address Settings`
+- Enter anything for `PPPoE User ID` and `PPPoE Password`
+- Choose `Automatic` for `DNS Settings` and `MTU Settings`
+- Choose `Do Not Use` for `Proxy Server`
+
+
 
 `To update :` copy all files from /PPPwn/ to /firmware/PPPwn/.
 
@@ -98,6 +108,7 @@ Raspberry pi offline image :
 Armbian amlogic s9xx offline image :
 
 [gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view)
+
 
 
 `To update this image :` copy all files from /PPPwn/ to /firmware/PPPwn/.
