@@ -53,7 +53,7 @@ When pwn the console don't touch anything it will increase the success rate.
 
 ## How to install :
 
-Copy the files from /PPPwn/ to /firmware/PPPwn/.
+Copy all files from /PPPwn/ to /firmware/PPPwn/.
 
 Install with this command :
 
@@ -63,7 +63,9 @@ sudo bash /boot/firmware/PPPwn/install.sh
 
 It will create config.sh and auto run script (run.sh) when boot the devices.
 
-## Optional : speed up the boot process.
+### Optional : speed up the boot process.
+
+Copy all files from /tuning/ to /firmware/tuning/.
 
 Raspbian :
 
@@ -80,22 +82,25 @@ sudo bash /boot/firmware/tuning/speedup_armbian.sh
 Shut down and connect to ps4 and test your pppwn.
 
 
-## To update : copy the files from /PPPwn/ to /firmware/PPPwn/.
+`To update :` copy all files from /PPPwn/ to /firmware/PPPwn/.
 
 ---------------------------------------------------------------------------------------
 
 
-## Raspberry pi offline image :
-
-https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view
+##Ready to use installed-image, very easy to setup. Burn image, edit config.sh, test your pwn.
 
 
-## Armbian amlogic s9xx offline image :
+Raspberry pi offline image :
 
-https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view
+[gdrive](https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view)
 
 
-## To update this image : copy the files from /PPPwn/ to /firmware/PPPwn/.
+Armbian amlogic s9xx offline image :
+
+[gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view)
+
+
+`To update this image :` copy all files from /PPPwn/ to /firmware/PPPwn/.
 
 
 
