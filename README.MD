@@ -2,7 +2,7 @@ I modify the script to using for OFFLINE mode.
 
 Test on PS4 Slim FW 10.50, Raspberry pi 2 and Sunvell T95m S905 TV Box.
 
-It can use with raspberry pi, linux system and armbian devices (tested on TV Box).
+It can use with raspberry pi, armbian devices and linux system.
 
 No need to install additional software.
 
@@ -21,6 +21,7 @@ Current hen support           (FW) : [8.00, 8.01, 8.03], [9.03, 9.04], [9.50, 9.
 https://github.com/EchoStretch/ps4-hen-vtx/releases
 
 Current pppwn support         (FW) : 7.00 - 11.00
+
 FW 7.00 / 7.01 / 7.02
 
 FW 7.50 / 7.51 / 7.55
@@ -47,14 +48,19 @@ When pwn the console don't touch anything it will increase the success rate.
 
 ---------------------------------------------------------------------------------------
 
-How to install
+How to install :
 
-Copy file from /PPPwn/ to /firmware/PPPwn/.
+Copy the files from /PPPwn/ to /firmware/PPPwn/.
 
 Install with this command :
 
 sudo bash /boot/firmware/PPPwn/install.sh
 
+It will create config.sh and auto run script (run.sh) when boot the devices.
+
+Shut down and connect to ps4 and test your pppwn.
+
+To update : copy the files from /PPPwn/ to /firmware/PPPwn/.
 ---------------------------------------------------------------------------------------
 
 Raspberry pi offline image :
@@ -65,4 +71,8 @@ Armbian amlogic s9xx offline image :
 
 https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view
 
-Credit to anyone that made it worked.
+To update this image : copy the files from /PPPwn/ to /firmware/PPPwn/.
+
+
+
+Credit to everyone that made it worked.
