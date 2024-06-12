@@ -10,7 +10,7 @@ No need to install additional software.
 
 ---------------------------------------------------------------------------------------
 
-Current goldhen support       (FW) : 9.00, [10.00, 10.01], 11.00
+Current goldhen support       (FW) : 9.00, [9.50, 9.51, 9.60], [10.00, 10.01], 11.00
 
 [GoldHEN](https://github.com/GoldHEN/GoldHEN/releases)
 
