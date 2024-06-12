@@ -14,29 +14,34 @@ Current goldhen support       (FW) : 9.00, [10.00, 10.01], 11.00
 
 [GoldHEN](https://github.com/GoldHEN/GoldHEN/releases)
 
+You need to place the goldhen.bin file onto the root of a usb drive and plug it into the console.
+Once goldhen has been loaded for the first time it will be copied to the consoles internal hdd and the usb is no longer required.
+
 Current hen (BestPig) support (FW) : [10.50, 10.70, 10.71], 11.00
 
 [BestPig](https://github.com/BestPig/ps4-hen-vtx/releases)
 
-Current hen support           (FW) : [8.00, 8.01, 8.03], [9.03, 9.04], [9.50, 9.51, 9.60], [10.50, 10.70, 10.71], 11.00
+No need to put any file on usb drive.
+
+Current hen support           (FW) : At this time, need bin loader and put payload.bin onto the root of a usb drive.
 
 [hen-vtx](https://github.com/EchoStretch/ps4-hen-vtx/releases)
 
 Current pppwn support         (FW) : 7.00 - 11.00
 
-`stage2_7.00.bin` = FW 7.00 / 7.01 / 7.02
+`stage2_7.00.bin`  = FW 7.00 / 7.01 / 7.02
 
-`stage2_7.50.bin` = FW 7.50 / 7.51 / 7.55
+`stage2_7.50.bin`  = FW 7.50 / 7.51 / 7.55
 
-`stage2_8.00.bin` = FW 8.00 / 8.01 / 8.03
+`stage2_8.00.bin`  = FW 8.00 / 8.01 / 8.03
 
-`stage2_8.50.bin` = FW 8.50 / 8.52
+`stage2_8.50.bin`  = FW 8.50 / 8.52
 
-`stage2_9.00.bin` = FW 9.00
+`stage2_9.00.bin`  = FW 9.00
 
-`stage2_9.03.bin` = FW 9.03 / 9.04
+`stage2_9.03.bin`  = FW 9.03 / 9.04
 
-`stage2_9.50.bin` = FW 9.50 / 9.51 / 9.60
+`stage2_9.50.bin`  = FW 9.50 / 9.51 / 9.60
 
 `stage2_10.00.bin` = FW 10.00 / 10.01
 
@@ -60,6 +65,8 @@ Install with this command :
 ```sh
 sudo bash /boot/firmware/PPPwn/install.sh
 ```
+
+During the install process you will be asked to set some options.
 
 It will create config.sh and auto run script (run.sh) when boot the devices.
 
