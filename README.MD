@@ -1,6 +1,6 @@
 # PI-Pwn-Offline
 
-I modify the script to using for OFFLINE mode.
+I rewrited the script to using for OFFLINE mode.
 
 Test on PS4 Slim FW 10.50, Raspberry pi 2 and Sunvell T95m S905 TV Box.
 
@@ -99,7 +99,7 @@ On your PS4:
 
 
 
-`To update :` copy all files from /PPPwn/ to /firmware/PPPwn/.
+`To update :` On PC copy and replace all files from /PPPwn/update/ to /firmware/PPPwn/.
 
 ---------------------------------------------------------------------------------------
 
@@ -118,8 +118,20 @@ Armbian amlogic s9xx offline image :
 
 
 
-`To update this image :` copy all files from /PPPwn/ to /firmware/PPPwn/.
+`To update this image :` On PC copy and replace all files from /PPPwn/update/ to /firmware/PPPwn/.
 
+---------------------------------------------------------------------------------------
+## config.sh
 
+| Config | Description |
+| --- | --- |
+| INTERFACE="eth0" | eth0, eth1, end0, etc |
+| FIRMWAREVERSION="10.71" | your current firmware |
+| SHUTDOWN=true | no need to change |
+| USBETHERNET=false | set to true if using external usb ethernet |
+| USEIPV6=true | false = using ipv4 (faster), true = for cursed ps4 |
+| USEGOLDHEN=true | no need to change |
+
+---------------------------------------------------------------------------------------
 
 ## Credit to everyone that made it worked.
