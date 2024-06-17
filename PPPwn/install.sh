@@ -82,8 +82,25 @@ FWV="11.00"
 break;;
 * ) echo -e '\033[31mPlease answer Y or N\033[0m';;
 esac
-done 
+done
 
+while true; do
+read -p "$(printf '\r\n\r\n\033[37mAre you using GoldHen for pwn\r\n\r\n\033[37m(Y|N)?: \033[0m')" usegold
+case $usegold in
+[Yy]* ) 
+GOLDHEN="true"
+echo -e '\033[32mGoldhen is being used\033[0m'
+echo -e '\033[32mYou need to place the goldhen.bin file onto the root of a usb drive and plug it into the console\033[0m'
+break;;
+[Nn]* ) 
+echo -e '\033[33mHen is being used\033[0m'
+GOLDHEN="false"
+break;;
+* ) echo -e '\033[31mPlease answer Y or N\033[0m';;
+esac
+done
+
+echo -e ''
 ip link
 
 while true; do
@@ -117,12 +134,30 @@ break;;
 esac
 done
 
+echo -e '\033[37mIPv6 slower than IPv4, no need to using IPv6 if pwn work\033[0m'
+while true; do
+read -p "$(printf '\r\n\r\n\033[37mAre you using IPv6 for pwn, it will improve curse PS4\r\n\r\n\033[37m(Y|N)?: \033[0m')" useipv
+case $useipv in
+[Yy]* ) 
+IPV6STATE="true"
+echo -e '\033[32mIPv6 is being used\033[0m'
+break;;
+[Nn]* ) 
+echo -e '\033[33mIPv4 is being used\033[0m'
+IPV6STATE="false"
+break;;
+* ) echo -e '\033[31mPlease answer Y or N\033[0m';;
+esac
+done
+
 # write config
 echo '#!/bin/bash
 INTERFACE="'$IFCE'"
 FIRMWAREVERSION="'$FWV'"
 SHUTDOWN='$SHTDN'
-USBETHERNET='$USBE'' | sudo tee /boot/firmware/PPPwn/config.sh
+USBETHERNET='$USBE'
+USEIPV6='$IPV6STATE'
+USEGOLDHEN='$GOLDHEN'' | sudo tee /boot/firmware/PPPwn/config.sh
 
 sudo rm /usr/lib/systemd/system/bluetooth.target
 sudo rm /usr/lib/systemd/system/network-online.target

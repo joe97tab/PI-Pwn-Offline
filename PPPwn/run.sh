@@ -6,43 +6,45 @@ fi
 #eth0, eth1, end0, etc.
 if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 #[7.00, 7.01, 7.02] [7.50, 7.51, 7.55] [8.00, 8.01, 8.03] [8.50, 8.52] 9.00 [9.03, 9.04] [9.50, 9.51, 9.60] [10.00, 10.01] [10.50, 10.70, 10.71] 11.00
-if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="10.50"; fi
+if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $SHUTDOWN ]; then SHUTDOWN=true; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
+if [ -z $USEIPV6 ]; then USEIPV6=false; fi
+if [ -z $USEGOLDHEN ]; then USEGOLDHEN=true; fi
 if [ -z $TIMEOUT ]; then TIMEOUT="5m"; fi
 
 #Correct FW for pppwn, if no goldhen it will use normal pppwn
 #prepare for hen-vtx.
 if [[ $FIRMWAREVERSION == "10.50" || $FIRMWAREVERSION == "10.70" || $FIRMWAREVERSION == "10.71" ]] ;then
-STAGE1="10.50"
-STAGE2="10.50"
+STAGE1FW="10.50"
+STAGE2FW="10.50"
 elif [[ $FIRMWAREVERSION == "10.00" || $FIRMWAREVERSION == "10.01" ]] ;then
-STAGE1="10.00"
-STAGE2="10.00"
+STAGE1FW="10.00"
+STAGE2FW="10.00"
 elif [[ $FIRMWAREVERSION == "9.50" || $FIRMWAREVERSION == "9.51" || $FIRMWAREVERSION == "9.60" ]] ;then
-STAGE1="9.50"
-STAGE2="9.50"
+STAGE1FW="9.50"
+STAGE2FW="9.50"
 elif [[ $FIRMWAREVERSION == "9.03" || $FIRMWAREVERSION == "9.04" ]] ;then
-STAGE1="9.03"
-STAGE2="9.03"
+STAGE1FW="9.03"
+STAGE2FW="9.03"
 elif [[ $FIRMWAREVERSION == "9.00" ]] ;then
-STAGE1="9.00"
-STAGE2="9.00"
+STAGE1FW="9.00"
+STAGE2FW="9.00"
 elif [[ $FIRMWAREVERSION == "8.50" || $FIRMWAREVERSION == "8.52" ]] ;then
-STAGE1="8.50"
-STAGE2="8.50"
+STAGE1FW="8.50"
+STAGE2FW="8.50"
 elif [[ $FIRMWAREVERSION == "8.00" || $FIRMWAREVERSION == "8.01" || $FIRMWAREVERSION == "8.03" ]] ;then
-STAGE1="8.00"
-STAGE2="8.00"
+STAGE1FW="8.00"
+STAGE2FW="8.00"
 elif [[ $FIRMWAREVERSION == "7.50" || $FIRMWAREVERSION == "7.51" || $FIRMWAREVERSION == "7.55" ]] ;then
-STAGE1="7.50"
-STAGE2="7.50"
+STAGE1FW="7.50"
+STAGE2FW="7.50"
 elif [[ $FIRMWAREVERSION == "7.00" || $FIRMWAREVERSION == "7.01" || $FIRMWAREVERSION == "7.02" ]] ;then
-STAGE1="7.00"
-STAGE2="7.00"
+STAGE1FW="7.00"
+STAGE2FW="7.00"
 else
-STAGE1="11.00"
-STAGE2="11.00"
+STAGE1FW="11.00"
+STAGE2FW="11.00"
 fi
 
 if [ $USBETHERNET = true ] ; then
@@ -79,6 +81,11 @@ fi
 arch=$(getconf LONG_BIT)
 if [ $arch -eq 32 ] && [ $CPPBIN = "pppwn64" ] ; then
 CPPBIN="pppwn7"
+fi
+
+#IPv6 improved curse ps4 or IPv4
+if [ $USEIPV6 = false ] ; then
+CPPBIN+='v1'
 fi
 
 echo -e "\n\n\033[36m _____  _____  _____                 
@@ -134,6 +141,6 @@ do
  	echo -e "\033[31m\nInterface $INTERFACE not found\033[0m\n" | sudo tee /dev/tty1
  	exit 1
  fi
-done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGE1//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGE1.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGE2.bin")
+done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGE1FW//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGE1FW.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGE2FW.bin")
 coproc read -t 1 && wait "$!" || true
 done
