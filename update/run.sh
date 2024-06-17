@@ -10,8 +10,6 @@ if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $SHUTDOWN ]; then SHUTDOWN=true; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
 if [ -z $USEIPV6 ]; then USEIPV6=false; fi
-if [ -z $USEGOLDHEN ]; then USEGOLDHEN=true; fi
-if [ -z $TIMEOUT ]; then TIMEOUT="5m"; fi
 
 sudo mkdir /boot/firmware/update/
 sudo mv /boot/firmware/PPPwn/PPPwn.tar /boot/firmware/update/PPPwn.tar
@@ -24,8 +22,6 @@ echo '#!/bin/bash
 INTERFACE="'$INTERFACE'"
 FIRMWAREVERSION="'$FIRMWAREVERSION'"
 USBETHERNET='$USBETHERNET'
-SHUTDOWN='$SHUTDOWN'
-USEIPV6='$USEIPV6'
-USEGOLDHEN='$USEGOLDHEN'' | sudo tee /boot/firmware/PPPwn/config.sh
+USEIPV6='$USEIPV6'' | sudo tee /boot/firmware/PPPwn/config.sh
 
 sudo reboot
