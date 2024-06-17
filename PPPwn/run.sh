@@ -7,44 +7,32 @@ fi
 if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 #[7.00, 7.01, 7.02] [7.50, 7.51, 7.55] [8.00, 8.01, 8.03] [8.50, 8.52] 9.00 [9.03, 9.04] [9.50, 9.51, 9.60] [10.00, 10.01] [10.50, 10.70, 10.71] 11.00
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
-if [ -z $SHUTDOWN ]; then SHUTDOWN=true; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
 if [ -z $USEIPV6 ]; then USEIPV6=false; fi
-if [ -z $USEGOLDHEN ]; then USEGOLDHEN=true; fi
 if [ -z $TIMEOUT ]; then TIMEOUT="5m"; fi
 
-#Correct FW for pppwn, if no goldhen it will use normal pppwn
-#prepare for hen-vtx.
+#Correct FW for pppwn
+STAGEFW=$FIRMWAREVERSION
 if [[ $FIRMWAREVERSION == "10.50" || $FIRMWAREVERSION == "10.70" || $FIRMWAREVERSION == "10.71" ]] ;then
-STAGE1FW="10.50"
-STAGE2FW="10.50"
+STAGEFW="10.50"
 elif [[ $FIRMWAREVERSION == "10.00" || $FIRMWAREVERSION == "10.01" ]] ;then
-STAGE1FW="10.00"
-STAGE2FW="10.00"
+STAGEFW="10.00"
 elif [[ $FIRMWAREVERSION == "9.50" || $FIRMWAREVERSION == "9.51" || $FIRMWAREVERSION == "9.60" ]] ;then
-STAGE1FW="9.50"
-STAGE2FW="9.50"
+STAGEFW="9.50"
 elif [[ $FIRMWAREVERSION == "9.03" || $FIRMWAREVERSION == "9.04" ]] ;then
-STAGE1FW="9.03"
-STAGE2FW="9.03"
+STAGEFW="9.03"
 elif [[ $FIRMWAREVERSION == "9.00" ]] ;then
-STAGE1FW="9.00"
-STAGE2FW="9.00"
+STAGEFW="9.00"
 elif [[ $FIRMWAREVERSION == "8.50" || $FIRMWAREVERSION == "8.52" ]] ;then
-STAGE1FW="8.50"
-STAGE2FW="8.50"
+STAGEFW="8.50"
 elif [[ $FIRMWAREVERSION == "8.00" || $FIRMWAREVERSION == "8.01" || $FIRMWAREVERSION == "8.03" ]] ;then
-STAGE1FW="8.00"
-STAGE2FW="8.00"
+STAGEFW="8.00"
 elif [[ $FIRMWAREVERSION == "7.50" || $FIRMWAREVERSION == "7.51" || $FIRMWAREVERSION == "7.55" ]] ;then
-STAGE1FW="7.50"
-STAGE2FW="7.50"
+STAGEFW="7.50"
 elif [[ $FIRMWAREVERSION == "7.00" || $FIRMWAREVERSION == "7.01" || $FIRMWAREVERSION == "7.02" ]] ;then
-STAGE1FW="7.00"
-STAGE2FW="7.00"
+STAGEFW="7.00"
 else
-STAGE1FW="11.00"
-STAGE2FW="11.00"
+STAGEFW="11.00"
 fi
 
 if [ $USBETHERNET = true ] ; then
@@ -126,21 +114,17 @@ while read -r stdo ;
 do 
  if [[ $stdo  == "[+] Done!" ]] ; then
 	echo -e "\033[32m\nConsole PPPwned! \033[0m\n" | sudo tee /dev/tty1
-    if [ $SHUTDOWN = true ] ; then
-     sudo poweroff
-    else
-     sudo ip link set $INTERFACE down
-    fi
+	sudo poweroff
 	exit 0
  elif [[ $stdo  == *"Scanning for corrupted object...failed"* ]] ; then
- 	echo -e "\033[31m\nFailed retrying...\033[0m\n" | sudo tee /dev/tty1
+	echo -e "\033[31m\nFailed retrying...\033[0m\n" | sudo tee /dev/tty1
  elif [[ $stdo  == *"Unsupported firmware version"* ]] ; then
- 	echo -e "\033[31m\nUnsupported firmware version\033[0m\n" | sudo tee /dev/tty1
- 	exit 1
+	echo -e "\033[31m\nUnsupported firmware version\033[0m\n" | sudo tee /dev/tty1
+	exit 1
  elif [[ $stdo  == *"Cannot find interface with name of"* ]] ; then
- 	echo -e "\033[31m\nInterface $INTERFACE not found\033[0m\n" | sudo tee /dev/tty1
- 	exit 1
+	echo -e "\033[31m\nInterface $INTERFACE not found\033[0m\n" | sudo tee /dev/tty1
+	exit 1
  fi
-done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGE1FW//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGE1FW.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGE2FW.bin")
+done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGEFW//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGEFW.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGEFW.bin")
 coproc read -t 1 && wait "$!" || true
 done

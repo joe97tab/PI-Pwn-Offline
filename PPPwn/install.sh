@@ -11,21 +11,6 @@ echo -e '\033[37mC++ Port            : xfangfang\033[0m'
 echo -e '\033[37mMod By              : joe97tab\033[0m'
 
 while true; do
-read -p "$(printf '\r\n\r\n\033[37mDo you want the device to shutdown after pwn success\r\n\r\n\033[37m(Y|N)?: \033[0m')" pisht
-case $pisht in
-[Yy]* ) 
-SHTDN="true"
-echo -e '\033[32mThe device will shutdown\033[0m'
-break;;
-[Nn]* ) 
-echo -e '\033[33mThe device will not shutdown\033[0m'
-SHTDN="false"
-break;;
-* ) echo -e '\033[31mPlease answer Y or N\033[0m';;
-esac
-done
-
-while true; do
 read -p "$(printf '\r\n\r\n\033[37mAre you using a usb to ethernet adapter for the console connection\r\n\r\n\033[37m(Y|N)?: \033[0m')" usbeth
 case $usbeth in
 [Yy]* ) 
@@ -79,22 +64,6 @@ break;;
 [Nn]* ) 
 echo -e '\033[32mUsing the default setting: 11.00\033[0m'
 FWV="11.00"
-break;;
-* ) echo -e '\033[31mPlease answer Y or N\033[0m';;
-esac
-done
-
-while true; do
-read -p "$(printf '\r\n\r\n\033[37mAre you using GoldHen for pwn\r\n\r\n\033[37m(Y|N)?: \033[0m')" usegold
-case $usegold in
-[Yy]* ) 
-GOLDHEN="true"
-echo -e '\033[32mGoldhen is being used\033[0m'
-echo -e '\033[32mYou need to place the goldhen.bin file onto the root of a usb drive and plug it into the console\033[0m'
-break;;
-[Nn]* ) 
-echo -e '\033[33mHen is being used\033[0m'
-GOLDHEN="false"
 break;;
 * ) echo -e '\033[31mPlease answer Y or N\033[0m';;
 esac
@@ -154,10 +123,8 @@ done
 echo '#!/bin/bash
 INTERFACE="'$IFCE'"
 FIRMWAREVERSION="'$FWV'"
-SHUTDOWN='$SHTDN'
 USBETHERNET='$USBE'
-USEIPV6='$IPV6STATE'
-USEGOLDHEN='$GOLDHEN'' | sudo tee /boot/firmware/PPPwn/config.sh
+USEIPV6='$IPV6STATE'' | sudo tee /boot/firmware/PPPwn/config.sh
 
 sudo rm /usr/lib/systemd/system/bluetooth.target
 sudo rm /usr/lib/systemd/system/network-online.target
