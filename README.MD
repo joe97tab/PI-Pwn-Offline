@@ -127,10 +127,8 @@ Armbian amlogic s9xx offline image :
 | --- | --- |
 | INTERFACE="eth0" | eth0, eth1, end0, etc |
 | FIRMWAREVERSION="10.71" | your current firmware |
-| SHUTDOWN=true | no need to change |
 | USBETHERNET=false | set to true if using external usb ethernet |
 | USEIPV6=true | false = using ipv4 (faster), true = for cursed ps4 |
-| USEGOLDHEN=true | no need to change |
 
 ---------------------------------------------------------------------------------------
 
