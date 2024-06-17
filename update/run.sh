@@ -9,7 +9,7 @@ if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $SHUTDOWN ]; then SHUTDOWN=true; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
-if [ -z $USEIPV6 ]; then USEIPV6=true; fi
+if [ -z $USEIPV6 ]; then USEIPV6=false; fi
 if [ -z $USEGOLDHEN ]; then USEGOLDHEN=true; fi
 if [ -z $TIMEOUT ]; then TIMEOUT="5m"; fi
 
@@ -23,9 +23,9 @@ sudo rm -rf /boot/firmware/update/
 echo '#!/bin/bash
 INTERFACE="'$INTERFACE'"
 FIRMWAREVERSION="'$FIRMWAREVERSION'"
-USEGOLDHEN=true
+USBETHERNET='$USBETHERNET'
 SHUTDOWN='$SHUTDOWN'
-USEIPV6=false
-USBETHERNET='$USBETHERNET'' | sudo tee /boot/firmware/PPPwn/config.sh
+USEIPV6='$USEIPV6'
+USEGOLDHEN='$USEGOLDHEN'' | sudo tee /boot/firmware/PPPwn/config.sh
 
 sudo reboot
