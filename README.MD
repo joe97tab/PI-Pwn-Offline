@@ -99,7 +99,7 @@ On your PS4:
 
 
 
-`To update :` On PC copy and replace all files from /PPPwn/update/ to /firmware/PPPwn/.
+`To update :` On PC copy and replace all files from /update/ to /firmware/PPPwn/.
 
 ---------------------------------------------------------------------------------------
 
@@ -118,7 +118,7 @@ Armbian amlogic s9xx offline image :
 
 
 
-`To update this image :` On PC copy and replace all files from /PPPwn/update/ to /firmware/PPPwn/.
+`To update this image :` On PC copy and replace all files from /update/ to /firmware/PPPwn/.
 
 ---------------------------------------------------------------------------------------
 ## config.sh
