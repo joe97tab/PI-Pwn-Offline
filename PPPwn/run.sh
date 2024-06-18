@@ -114,4 +114,5 @@ coproc read -t 6 && wait "$!" || true
 sudo poweroff
 fi
 done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${STAGEVER//.}" --stage1 "/boot/firmware/PPPwn/stage1_$STAGEVER.bin" --stage2 "/boot/firmware/PPPwn/stage2_$STAGEVER.bin")
+coproc read -t 1 && wait "$!" || true
 done
