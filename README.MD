@@ -19,13 +19,16 @@ Current goldhen support       (FW) : 9.00, [9.50, 9.51, 9.60], [10.00, 10.01], 1
 You need to place the goldhen.bin file onto the root of a usb drive and plug it into the console.
 Once goldhen has been loaded for the first time it will be copied to the consoles internal hdd and the usb is no longer required.
 
-Current hen support           (FW) : Base on stooged worked.
+Current hen-vtx support       (FW) : All hen method base on stooged worked.
+
+[hen-vtx](https://github.com/EchoStretch/ps4-hen-vtx/releases)
 
 Current pppwn support         (FW) : 7.00 - 11.00
 
 When pwn the console don't touch anything it will increase the success rate.
 
 ---------------------------------------------------------------------------------------
+
 
 ## How to install :
 
@@ -68,38 +71,49 @@ On your PS4:
 - Choose `Automatic` for `DNS Settings` and `MTU Settings`
 - Choose `Do Not Use` for `Proxy Server`
 
-
-
-`To update :` On PC copy and replace all files from /update/ to /firmware/PPPwn/.
+Normally the pwn process will success on first or second attempt.
 
 ---------------------------------------------------------------------------------------
 
+## Ready to use installed-image.
 
-##Ready to use installed-image, very easy to setup. Burn image, edit config.sh, test your pwn.
+Very easy to setup. Burn image, edit config.sh, test your pwn.
 
-
-Raspberry pi offline image :
+- Raspberry pi offline image :
 
 [gdrive](https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view)
 
 
-Armbian amlogic s9xx offline image :
+- Armbian amlogic s9xx offline image :
 
 [gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view)
 
 
+---------------------------------------------------------------------------------------
 
-`To update this image :` On PC copy and replace all files from /update/ to /firmware/PPPwn/.
+## How to update 
+
+`update` folder: This is current version from stooged, remove everything except offline used.
+
+`update v1` folder: This is old version mainly focus on IPv4 and seperated stage2.bin.
+It had a option to switch to IPv6, hen method (goldhen, hen-vtx, Bestpig, noBD and TheFlow).
+
+- On PC copy and replace all files from /update/ or /update v1/ to /firmware/PPPwn/.
+- Power your device, it will update and auto config from previos setup then reboot.
+- You can switch between this update by repeat previous step.
+- If something go wrong, check config.sh, use notepad++ to edit your desire value.
+
+Please keep in mind that pwn your PS4 with IPv4 address is faster than IPv6.
+It's better to use it if your PS4 support.
 
 ---------------------------------------------------------------------------------------
-## config.sh, pconfig.sh
+## config.sh, pconfig.sh for current version
 
 | Config | Description |
 | --- | --- |
 | INTERFACE="eth0" | eth0, eth1, end0, etc |
 | FIRMWAREVERSION="10.71" | your current firmware |
 | USBETHERNET=false | set to true if using external usb ethernet |
-
 
 | pconfig | Description |
 | --- | --- |
