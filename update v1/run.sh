@@ -10,13 +10,13 @@ fi
 if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
-if [ -z $STAGE2METHOD ]; then STAGE2METHOD="goldhen"; fi
+if [ -z $STAGE2METHOD ]; then STAGE2METHOD="flow"; fi
 if [ -z $USEIPV6 ]; then USEIPV6=false; fi
 
 if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
 if [ -z $XFBS ]; then XFBS="0"; fi
-if [ -z $XFNWB ]; then XFNWB=true; fi
+if [ -z $XFNWB ]; then XFNWB=false; fi
 
 sudo mkdir /boot/firmware/update/
 sudo mv /boot/firmware/PPPwn/PPPwn.tar /boot/firmware/update/PPPwn.tar

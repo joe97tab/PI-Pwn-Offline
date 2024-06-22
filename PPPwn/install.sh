@@ -102,7 +102,7 @@ echo '#!/bin/bash
 XFWAP="1"
 XFGD="4"
 XFBS="0"
-XFNWB=true' | sudo tee /boot/firmware/PPPwn/pconfig.sh
+XFNWB=false' | sudo tee /boot/firmware/PPPwn/pconfig.sh
 
 sudo rm /usr/lib/systemd/system/bluetooth.target
 sudo rm /usr/lib/systemd/system/network-online.target

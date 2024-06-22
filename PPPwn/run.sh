@@ -17,7 +17,7 @@ if [ -z $TIMEOUT ]; then TIMEOUT="5m"; fi
 if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
 if [ -z $XFBS ]; then XFBS="0"; fi
-if [ -z $XFNWB ]; then XFNWB=true; fi
+if [ -z $XFNWB ]; then XFNWB=false; fi
 if [ $XFNWB = true ] ; then
 XFNW="--no-wait-padi"
 else
