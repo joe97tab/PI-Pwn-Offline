@@ -2,7 +2,7 @@
 
 I rewrited stooged script to using for OFFLINE mode.
 
-Used IPv6, c++ binary from stooged that integrate stage1 and stage2.
+Used IPv6, c++ binary and bin from stooged.
 
 Test on PS4 Slim FW 10.50, Raspberry pi 2 and Sunvell T95m S905 TV Box.
 
@@ -97,6 +97,9 @@ Very easy to setup. Burn image, edit config.sh, test your pwn.
 
 `update v1` folder: This is old version mainly focus on IPv4 and seperated stage2.bin.
 It had a option to switch to IPv6, hen method (goldhen, hen-vtx, Bestpig, noBD and TheFlow).
+
+`update custom` folder: Used Ipv4 only, faster speed but less stability.
+FW 9.00-11.00, main focus on GoldHEN.
 
 - On PC copy and replace all files from /update/ or /update v1/ to /firmware/PPPwn/.
 - Power your device, it will update and auto config from previos setup then reboot.
