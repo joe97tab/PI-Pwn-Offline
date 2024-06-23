@@ -12,12 +12,18 @@ fi
 if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
+if [ -z $USEIPV6 ]; then USEIPV6=false; fi
 if [ -z $TIMEOUT ]; then TIMEOUT="5m"; fi
 
 if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
 if [ -z $XFBS ]; then XFBS="0"; fi
 if [ -z $XFNWB ]; then XFNWB=false; fi
+if [ $USEIPV6 = true ] ; then
+XFIP="1"
+else
+XFIP="0"
+fi 
 if [ $XFNWB = true ] ; then
 XFNW="--no-wait-padi"
 else
@@ -76,13 +82,13 @@ echo -e "\033[37mMod By          : joe97tab\033[0m" | sudo tee /dev/tty1
 sudo systemctl stop pppoe
 if [ $USBETHERNET = true ] ; then
 	echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/unbind
-	coproc read -t 2 && wait "$!" || true
+	coproc read -t 1 && wait "$!" || true
 	echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind
-	coproc read -t 5 && wait "$!" || true
+	coproc read -t 4 && wait "$!" || true
 	sudo ip link set $INTERFACE up
 else
 	sudo ip link set $INTERFACE down
-	coproc read -t 5 && wait "$!" || true
+	coproc read -t 4 && wait "$!" || true
 	sudo ip link set $INTERFACE up
 fi
 
@@ -100,7 +106,7 @@ if [[ $stdo  == "[+] Done!" ]] ;then
 coproc read -t 6 && wait "$!" || true
 sudo poweroff
 fi
-done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${FIRMWAREVERSION//.}" --wait-after-pin $XFWAP --groom-delay $XFGD --buffer-size $XFBS $XFNW)
+done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${FIRMWAREVERSION//.}" --ipv $XFIP --wait-after-pin $XFWAP --groom-delay $XFGD --buffer-size $XFBS $XFNW)
 sudo ip link set $INTERFACE down
 coproc read -t 3 && wait "$!" || true
 sudo ip link set $INTERFACE up

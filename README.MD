@@ -93,7 +93,7 @@ Very easy to setup. Burn image, edit config.sh, test your pwn.
 
 ## How to update 
 
-`update v2` folder: This is current version from stooged, use IPv6 , remove everything except offline used.
+`update v2` folder: This is current version from stooged, remove everything except offline used.
 
 `update v1` folder: This is old version mainly focus on IPv4 and seperated stage2.bin.
 It had a option to switch to IPv6, hen method (goldhen, hen-vtx, Bestpig, noBD and TheFlow).
@@ -101,8 +101,8 @@ It had a option to switch to IPv6, hen method (goldhen, hen-vtx, Bestpig, noBD a
 `update v0` folder: Used Ipv4 only, faster speed but less stability.
 FW 9.00-11.00, mainly focus on GoldHEN.
 
-- On PC copy and replace all files from /update/ or /update v1/ to /firmware/PPPwn/.
-- Power your device, it will update and auto config from previos setup then reboot.
+- On PC copy and replace all files from /update v2/ or /update v1/ or /update v0/ to /firmware/PPPwn/.
+- Power your device, it will update and auto config from previous setup then reboot.
 - You can switch between this update by repeat previous step.
 - If something go wrong, check config.sh, use notepad++ to edit your desire value.
 
@@ -117,6 +117,7 @@ It's better to use it if your PS4 support.
 | INTERFACE="eth0" | eth0, eth1, end0, etc |
 | FIRMWAREVERSION="10.71" | your current firmware |
 | USBETHERNET=false | set to true if using external usb ethernet |
+| USEIPV6=false | false = using ipv4 (faster), true = for cursed ps4 |
 
 | pconfig | Description |
 | --- | --- |

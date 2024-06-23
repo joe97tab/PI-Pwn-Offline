@@ -10,6 +10,7 @@ fi
 if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
+if [ -z $USEIPV6 ]; then USEIPV6=false; fi
 
 if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
@@ -28,7 +29,8 @@ sudo rm -rf /boot/firmware/update/
 echo '#!/bin/bash
 INTERFACE="'$INTERFACE'"
 FIRMWAREVERSION="'$FIRMWAREVERSION'"
-USBETHERNET='$USBETHERNET'' | sudo tee /boot/firmware/PPPwn/config.sh
+USBETHERNET='$USBETHERNET'
+USEIPV6='$USEIPV6'' | sudo tee /boot/firmware/PPPwn/config.sh
 
 # create pppwn c++ config
 echo '#!/bin/bash
