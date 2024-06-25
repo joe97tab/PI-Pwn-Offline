@@ -32,9 +32,9 @@ When pwn the console don't touch anything it will increase the success rate.
 
 ## How to install :
 
-Copy all files from /PPPwn/ to /firmware/PPPwn/.
+On PC copy all files from /PPPwn/ to /firmware/PPPwn/.
 
-Install with this command :
+Install in terminal with this command :
 
 ```sh
 sudo bash /boot/firmware/PPPwn/install.sh
@@ -45,6 +45,7 @@ During the install process you will be asked to set some options.
 It will create config.sh and auto run script (run.sh) when boot the devices.
 
 ### Optional : speed up the boot process.
+Reduced boot time and increasd overall speed by disable some services.
 
 Copy all files from /tuning/ to /firmware/tuning/.
 
@@ -79,12 +80,12 @@ Normally the pwn process will success on first or second attempt.
 
 Very easy to setup. Burn image, edit config.sh, test your pwn.
 
-- Raspberry pi offline image :
+- Raspberry pi offline image (05/06/2024) :
 
 [gdrive](https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view)
 
 
-- Armbian amlogic s9xx offline image :
+- Armbian amlogic s9xx offline image (06/06/2024) :
 
 [gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view)
 
