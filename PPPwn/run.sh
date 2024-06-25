@@ -19,11 +19,11 @@ if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
 if [ -z $XFBS ]; then XFBS="0"; fi
 if [ -z $XFNWB ]; then XFNWB=false; fi
-if [ $USEIPV6 = true ] ; then
-XFIP="1"
+if [ $USEIPV6 = false ] ; then
+XFIP="fe80::4141:4141:4141:4141"
 else
-XFIP="0"
-fi 
+XFIP="fe80::9f9f:41ff:9f9f:41ff"
+fi
 if [ $XFNWB = true ] ; then
 XFNW="--no-wait-padi"
 else
