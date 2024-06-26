@@ -97,7 +97,7 @@ Very easy to setup. Burn image, edit config.sh, test your pwn.
 `update v2` folder: This is current version from stooged, remove everything except offline used.
 
 `update v1` folder: This is old version mainly focus on IPv4 and seperated stage2.bin.
-It had a option to switch to IPv6, hen method (goldhen, hen-vtx, Bestpig, noBD and TheFlow).
+It had a option to switch to IPv6, hen method (goldhen, hen-vtx and TheFlow).
 
 `update v0` folder: Used Ipv4 only, faster speed but less stability.
 FW 9.00-11.00, mainly focus on GoldHEN.
