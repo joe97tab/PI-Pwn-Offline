@@ -10,8 +10,8 @@ if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
 
 sudo mkdir /boot/firmware/update/
 sudo mv /boot/firmware/PPPwn/PPPwn.tar /boot/firmware/update/PPPwn.tar
-sudo rm /boot/firmware/PPPwn/*.*
-sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/PPPwn/
+sudo rm -rf /boot/firmware/PPPwn/
+sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/
 sudo chmod 777 /boot/firmware/PPPwn/*.*
 sudo rm -rf /boot/firmware/update/
 
