@@ -7,8 +7,6 @@ if [ -f /boot/firmware/PPPwn/pconfig.sh ]; then
 source /boot/firmware/PPPwn/pconfig.sh
 fi
 
-#[7.00, 7.01, 7.02] [7.50, 7.51, 7.55] [8.00, 8.01, 8.03] [8.50, 8.52] 9.00 [9.03, 9.04] [9.50, 9.51, 9.60] [10.00, 10.01] [10.50, 10.70, 10.71] 11.00
-
 if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
@@ -75,6 +73,7 @@ echo -e "\n\n\033[36m _____  _____  _____
 \n\033[33mhttps://github.com/TheOfficialFloW/PPPwn\033[0m\n" | sudo tee /dev/tty1
 
 echo -e "\033[37mGoldhen by      : SiSTR0\033[0m" | sudo tee /dev/tty1
+echo -e "\033[37mHen by          : EchoStretch and BestPig\033[0m" | sudo tee /dev/tty1
 echo -e "\033[37mOriginal Script : Stooged\033[0m" | sudo tee /dev/tty1
 echo -e "\033[37mC++ Port        : xfangfang\033[0m" | sudo tee /dev/tty1
 echo -e "\033[37mMod By          : joe97tab\033[0m" | sudo tee /dev/tty1
@@ -104,6 +103,7 @@ while read -r stdo ;
 do 
 if [[ $stdo  == "[+] Done!" ]] ;then
 coproc read -t 6 && wait "$!" || true
+sudo ip link set $INTERFACE down
 sudo poweroff
 fi
 done < <(timeout $TIMEOUT sudo /boot/firmware/PPPwn/$CPPBIN --interface "$INTERFACE" --fw "${FIRMWAREVERSION//.}" --ipv $XFIP --wait-after-pin $XFWAP --groom-delay $XFGD --buffer-size $XFBS $XFNW)

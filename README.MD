@@ -4,7 +4,10 @@ I rewrited stooged script to using for OFFLINE mode.
 
 Used IPv6, c++ binary and bin from stooged.
 
-Test on PS4 Slim FW 10.50, Raspberry pi 2 and Sunvell T95m S905 TV Box.
+Test on PS4 Slim FW 10.50.
+- Raspberry pi 2.
+- Sunvell T95m S905 2gb/8gb TV Box.
+- AIS Playbox v2 S912 2gb/16gb TV Box.
 
 It can use with raspberry pi, armbian devices and linux system.
 
@@ -85,10 +88,18 @@ Very easy to setup. Burn image, edit config.sh, test your pwn.
 [gdrive](https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view)
 
 
-- Armbian amlogic s9xx offline image (06/06/2024) :
+- Armbian amlogic s9xx offline image (bookworm) (06/06/2024) :
+
+May not work correctly with some S912 devices.
+It also support S905x3 (not test).
 
 [gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view)
 
+- Armbian amlogic s9xx offline image (jammy) (28/06/2024) :
+
+Work with s912, s905x3 may not work.
+
+[gdrive](https://drive.google.com/file/d/1mxTshlN3Tv2iloabUE5FnuMjext5IycF/view)
 
 ---------------------------------------------------------------------------------------
 
@@ -129,6 +140,42 @@ It's better to use it if your PS4 support.
 
 See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 
+---------------------------------------------------------------------------------------
+
+## Tips
+
+| PS4 FW | GoldHEN | HEN-VTX | TheOfficialFloW |
+| --- | --- | --- | --- |
+| 11.00 | o | o | o |
+| 10.71 | x | o | o |
+| 10.70 | x | o | o |
+| 10.50 | x | o | o |
+| 10.01 | o | o | o |
+| 10.00 | o | o | o |
+| 9.60 | o | o | o |
+| 9.51 | ? | o | o |
+| 9.50 | ? | o | o |
+| 9.04 | x | o | o |
+| 9.03 | x | o | o |
+| 9.00 | o | o | o |
+| 8.52 | x | o | o |
+| 8.50 | x | o | o |
+| 8.03 | x | o | o |
+| 8.01 | x | o | o |
+| 8.00 | x | o | o |
+| 8.01 | x | o | o |
+| 7.55 | x | o | o |
+| 7.51 | x | o | o |
+| 7.50 | x | o | o |
+| 7.02 | x | x | o |
+| 7.01 | x | x | o |
+| 7.00 | x | x | o |
+
+- First, use IPv6 address and TheOfficialFloW to pwn PS4.
+- If it worked then change to IPv4 address.
+- If everthing worked change to GoldHEN or HEN.
+- no-wait-padi, can reduce pwn time but may miss captured package.
+ 
 ---------------------------------------------------------------------------------------
 
 ## Credit to everyone that made it worked.
