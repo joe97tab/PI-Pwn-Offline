@@ -33,7 +33,7 @@ When pwn the console don't touch anything it will increase the success rate.
 ---------------------------------------------------------------------------------------
 
 
-## How to install :
+## How to install (v2) :
 
 On PC copy all files from /PPPwn/ to /firmware/PPPwn/.
 
@@ -48,6 +48,7 @@ During the install process you will be asked to set some options.
 It will create config.sh and auto run script (run.sh) when boot the devices.
 
 ### Optional : speed up the boot process.
+
 Reduced boot time and increasd overall speed by disable some services.
 
 Copy all files from /tuning/ to /firmware/tuning/.
@@ -144,6 +145,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 
 ## Tips
 
+<table align="center"></table>
 | PS4 FW | GoldHEN | HEN-VTX | TheOfficialFloW |
 | --- | --- | --- | --- |
 | 11.00 | o | o | o |
