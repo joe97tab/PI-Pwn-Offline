@@ -1,8 +1,6 @@
 # PI-Pwn-Offline
 
-I rewrited stooged script to using for OFFLINE mode.
-
-Used IPv6, c++ binary and bin from stooged.
+I rewrited the script to using for OFFLINE mode.
 
 Test on PS4 Slim FW 10.50.
 - Raspberry pi 2.
@@ -15,6 +13,12 @@ No need to install additional software.
 
 ---------------------------------------------------------------------------------------
 
+Current pppwn support         (FW) : 7.00 - 11.00
+
+[PPPwn](https://github.com/TheOfficialFloW/PPPwn)
+
+The exploit only prints `PPPwned` on your PS4 as a proof-of-concept.
+
 Current goldhen support       (FW) : 9.00, [9.50, 9.51, 9.60], [10.00, 10.01], 11.00
 
 [GoldHEN](https://github.com/GoldHEN/GoldHEN/releases)
@@ -22,18 +26,17 @@ Current goldhen support       (FW) : 9.00, [9.50, 9.51, 9.60], [10.00, 10.01], 1
 You need to place the goldhen.bin file onto the root of a usb drive and plug it into the console.
 Once goldhen has been loaded for the first time it will be copied to the consoles internal hdd and the usb is no longer required.
 
-Current hen-vtx support       (FW) : All hen method base on stooged worked.
+Current hen support           (FW) : 7.55 - 11.00
 
 [hen-vtx](https://github.com/EchoStretch/ps4-hen-vtx/releases)
 
-Current pppwn support         (FW) : 7.00 - 11.00
-
-When pwn the console don't touch anything it will increase the success rate.
+You need to place the payload.bin file onto the root of a usb drive and plug it into the console.
+Once hen has been loaded for the first time it will be copied to the consoles internal hdd and the usb is no longer required.
 
 ---------------------------------------------------------------------------------------
 
 
-## How to install :
+## How to install (v1) :
 
 On PC copy all files from /PPPwn/ to /firmware/PPPwn/.
 
@@ -48,6 +51,7 @@ During the install process you will be asked to set some options.
 It will create config.sh and auto run script (run.sh) when boot the devices.
 
 ### Optional : speed up the boot process.
+
 Reduced boot time and increasd overall speed by disable some services.
 
 Copy all files from /tuning/ to /firmware/tuning/.
@@ -107,8 +111,8 @@ Work with s912, s905x3 may not work.
 
 `update v2` folder: This is current version from stooged, remove everything except offline used.
 
-`update v1` folder: This is old version mainly focus on IPv4 and seperated stage2.bin.
-It had a option to switch to IPv6, hen method (goldhen, hen-vtx and TheFlow).
+`update v1` folder: This is all-in-one version cover all firmware from 7.00-11.00.
+It had a option to switch to IPv6 or IPv4, hen method (goldhen, hen-vtx and TheFlow).
 
 `update v0` folder: Used Ipv4 only, faster speed but less stability.
 FW 9.00-11.00, mainly focus on GoldHEN.
@@ -122,14 +126,24 @@ Please keep in mind that pwn your PS4 with IPv4 address is faster than IPv6.
 It's better to use it if your PS4 support.
 
 ---------------------------------------------------------------------------------------
-## config.sh, pconfig.sh for current version
+
+## config.sh
 
 | Config | Description |
 | --- | --- |
 | INTERFACE="eth0" | eth0, eth1, end0, etc |
 | FIRMWAREVERSION="10.71" | your current firmware |
 | USBETHERNET=false | set to true if using external usb ethernet |
+| STAGE2METHOD="goldhen" | goldhen, hen and flow |
 | USEIPV6=false | false = using ipv4 (faster), true = for cursed ps4 |
+
+`STAGE2METHOD` If no stage2 avialable it will use TheOfficialFloW.
+
+| STAGE2METHOD | Description |
+| --- | --- |
+| goldhen | use goldhen, put goldhen.bin to root of usb drive |
+| hen | use vtx-hen, put payload.bin to root of usb drive |
+| etc | anything not in the above list will use TheOfficialFloW |
 
 | pconfig | Description |
 | --- | --- |
@@ -165,8 +179,8 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 | 8.00 | x | o | o |
 | 8.01 | x | o | o |
 | 7.55 | x | o | o |
-| 7.51 | x | o | o |
-| 7.50 | x | o | o |
+| 7.51 | x | x | o |
+| 7.50 | x | x | o |
 | 7.02 | x | x | o |
 | 7.01 | x | x | o |
 | 7.00 | x | x | o |
@@ -175,6 +189,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 - If it worked then change to IPv4 address.
 - If everthing worked change to GoldHEN or HEN.
 - no-wait-padi, can reduce pwn time but may miss captured package.
+- When pwn the console don't touch anything it will increase the success rate.
  
 ---------------------------------------------------------------------------------------
 
