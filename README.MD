@@ -15,7 +15,7 @@ No need to install additional software.
 
 Current pppwn support         (FW) : 7.00 - 11.00
 
-[PPPwn](https://github.com/TheOfficialFloW/PPPwn)
+[TheOfficialFloW](https://github.com/TheOfficialFloW/PPPwn)
 
 The exploit only prints `PPPwned` on your PS4 as a proof-of-concept.
 
