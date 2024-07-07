@@ -26,7 +26,7 @@ Current goldhen support       (FW) : 9.00, [9.50, 9.51, 9.60], [10.00, 10.01], 1
 You need to place the goldhen.bin file onto the root of a usb drive and plug it into the console.
 Once goldhen has been loaded for the first time it will be copied to the consoles internal hdd and the usb is no longer required.
 
-Current hen support           (FW) : 7.55 - 11.00
+Current hen support           (FW) : 7.50 - 11.00
 
 [hen-vtx](https://github.com/EchoStretch/ps4-hen-vtx/releases)
 
@@ -179,8 +179,8 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 | 8.00 | x | o | o |
 | 8.01 | x | o | o |
 | 7.55 | x | o | o |
-| 7.51 | x | x | o |
-| 7.50 | x | x | o |
+| 7.51 | x | o | o |
+| 7.50 | x | o | o |
 | 7.02 | x | x | o |
 | 7.01 | x | x | o |
 | 7.00 | x | x | o |
