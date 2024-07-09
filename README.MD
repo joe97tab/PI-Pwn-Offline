@@ -5,33 +5,39 @@ I rewrited the script to using for OFFLINE mode.
 Test on PS4 Slim FW 10.50.
 - Raspberry pi 2.
 - Sunvell T95m S905 2gb/8gb TV Box.
-- AIS Playbox v2 S912 2gb/16gb TV Box.
+- AIS Playbox v2 S912 2gb/16gb TV Box (not root).
 
 It can use with raspberry pi, armbian devices and linux system.
 
-No need to install additional software.
+No need to install additional software, no root required.
 
 ---------------------------------------------------------------------------------------
 
-Current pppwn support         (FW) : 7.00 - 11.00
+Current pppwn support          (FW) : 7.00 - 11.00
 
 [TheOfficialFloW](https://github.com/TheOfficialFloW/PPPwn)
 
 The exploit only prints `PPPwned` on your PS4 as a proof-of-concept.
 
-Current goldhen support       (FW) : 9.00, [9.50, 9.51, 9.60], [10.00, 10.01], 11.00
+Current goldhen support        (FW) : 9.00, 9.60, 10.00, 10.01, 11.00
 
 [GoldHEN](https://github.com/GoldHEN/GoldHEN/releases)
 
 You need to place the goldhen.bin file onto the root of a usb drive and plug it into the console.
 Once goldhen has been loaded for the first time it will be copied to the consoles internal hdd and the usb is no longer required.
 
-Current hen support           (FW) : 7.00 - 11.00
+Current hen support            (FW) : 7.00 - 11.00
 
 [hen-vtx](https://github.com/EchoStretch/ps4-hen-vtx/releases)
 
 You need to place the payload.bin file onto the root of a usb drive and plug it into the console.
 Once hen has been loaded for the first time it will be copied to the consoles internal hdd and the usb is no longer required.
+
+Current hen by BestPig support (FW) : 10.50
+
+[BestPig](https://github.com/BestPig/ps4-hen-vtx/releases)
+
+No need to place any file onto the root of a usb drive.
 
 ---------------------------------------------------------------------------------------
 
@@ -107,35 +113,28 @@ Work with s912, s905x3 may not work.
 
 ---------------------------------------------------------------------------------------
 
-## How to update 
+## How to update
 
-`update v2` folder: This is current version from stooged, remove everything except offline used.
-
-`update v1` folder: This is all-in-one version cover all firmware from 7.00-11.00.
-It had a option to switch to IPv6 or IPv4, hen method (goldhen, hen-vtx and TheFlow).
-
-`update v0` folder: Used Ipv4 only, faster speed but less stability.
-FW 9.00-11.00, mainly focus on GoldHEN.
-
-- On PC copy and replace all files from /update v2/ or /update v1/ or /update v0/ to /firmware/PPPwn/.
+- On PC copy and replace files /update/run.sh and /PPPwn/PPPwn.tar to /firmware/PPPwn/.
 - Power your device, it will update and auto config from previous setup then reboot.
-- You can switch between this update by repeat previous step.
 - If something go wrong, check config.sh, use notepad++ to edit your desire value.
 
 Please keep in mind that pwn your PS4 with IPv4 address is faster than IPv6.
 It's better to use it if your PS4 support.
 
----------------------------------------------------------------------------------------
+## config.sh, pconfig.sh
 
-## config.sh
-
-| Config | Description |
+| config.sh | Description |
 | --- | --- |
+| CPPMETHOD="1" | 1 or v = v1 IPv4 Only, 2 or s = stooged binary, etc = lastest xfangfang binary |
 | INTERFACE="eth0" | eth0, eth1, end0, etc |
 | FIRMWAREVERSION="10.71" | your current firmware |
 | USBETHERNET=false | set to true if using external usb ethernet |
-| STAGE2METHOD="goldhen" | goldhen, hen and flow |
+| STAGE2METHOD="goldhen" | goldhen, hen, bestpig (10.50 Only) and flow |
 | USEIPV6=false | false = using ipv4 (faster), true = for cursed ps4 |
+
+`CPPMETHOD` If incorrect cpp setup it will use lastest xfangfang binary.
+Stooged binary had intregrated hen-vtx into the binary, no need to place any file onto the root of a usb drive.
 
 `STAGE2METHOD` If no stage2 avialable it will use TheOfficialFloW.
 
@@ -143,9 +142,10 @@ It's better to use it if your PS4 support.
 | --- | --- |
 | goldhen | use goldhen, put goldhen.bin to root of usb drive |
 | hen | use vtx-hen, put payload.bin to root of usb drive |
+| bestpig | use hen by BestPig, FW 10.50 Only |
 | etc | anything not in the above list will use TheOfficialFloW |
 
-| pconfig | Description |
+| pconfig.sh | Description |
 | --- | --- |
 | XFWAP="1" | --wait-after-pin |
 | XFGD="4" | --groom-delay |
@@ -167,8 +167,8 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 | 10.01 | o | o | o |
 | 10.00 | o | o | o |
 | 9.60 | o | o | o |
-| 9.51 | ? | o | o |
-| 9.50 | ? | o | o |
+| 9.51 | x | o | o |
+| 9.50 | x | o | o |
 | 9.04 | x | o | o |
 | 9.03 | x | o | o |
 | 9.00 | o | o | o |
