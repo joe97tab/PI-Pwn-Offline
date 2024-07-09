@@ -190,6 +190,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 - If everthing worked change to GoldHEN or HEN.
 - no-wait-padi, can reduce pwn time but may miss captured package.
 - When pwn the console don't touch anything it will increase the success rate.
+- `LAN cable not connected.` It means the program will try next attempt, if pwned success it turned off Ethernet and shutdown.
  
 ---------------------------------------------------------------------------------------
 
