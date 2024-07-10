@@ -42,7 +42,7 @@ No need to place any file onto the root of a usb drive.
 ---------------------------------------------------------------------------------------
 
 
-## How to install (v1) :
+## How to install :
 
 On PC copy all files from /PPPwn/ to /firmware/PPPwn/.
 
@@ -58,7 +58,7 @@ It will create config.sh and auto run script (run.sh) when boot the devices.
 
 ### Optional : speed up the boot process.
 
-Reduced boot time and increasd overall speed by disable some services.
+Reduced boot time and increased overall speed by disable some services.
 
 Copy all files from /tuning/ to /firmware/tuning/.
 
@@ -132,6 +132,7 @@ It's better to use it if your PS4 support.
 | USBETHERNET=false | set to true if using external usb ethernet |
 | STAGE2METHOD="goldhen" | goldhen, hen, bestpig (10.50 Only) and flow |
 | USEIPV6=false | false = using ipv4 (faster), true = for cursed ps4 |
+| DELAYSTART="0" | delay time before pppwn start, set value between 0-15 seconds |
 
 `CPPMETHOD` If incorrect cpp setup it will use lastest xfangfang binary.
 Stooged binary had intregrated hen-vtx into the binary, no need to place any file onto the root of a usb drive.
@@ -190,7 +191,8 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 - If everthing worked change to GoldHEN or HEN.
 - no-wait-padi, can reduce pwn time but may miss captured package.
 - When pwn the console don't touch anything it will increase the success rate.
-- `LAN cable not connected.` It means the program will try next attempt, if pwned success it turned off Ethernet and shutdown.
+- `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
+- `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet and shutdown.
  
 ---------------------------------------------------------------------------------------
 

@@ -13,6 +13,7 @@ if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
 if [ -z $STAGE2METHOD ]; then STAGE2METHOD="flow"; fi
 if [ -z $USEIPV6 ]; then USEIPV6=false; fi
+if [ -z $DELAYSTART ]; then DELAYSTART="0"; fi
 
 if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
@@ -33,7 +34,8 @@ INTERFACE="'$INTERFACE'"
 FIRMWAREVERSION="'$FIRMWAREVERSION'"
 USBETHERNET='$USBETHERNET'
 STAGE2METHOD="'$STAGE2METHOD'"
-USEIPV6='$USEIPV6'' | sudo tee /boot/firmware/PPPwn/config.sh
+USEIPV6='$USEIPV6'
+DELAYSTART="'$DELAYSTART'"' | sudo tee /boot/firmware/PPPwn/config.sh
 
 # create pppwn c++ config
 echo '#!/bin/bash
