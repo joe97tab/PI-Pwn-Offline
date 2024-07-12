@@ -215,29 +215,29 @@ read -p "$(printf '\r\n\033[37mWould you like to change the time delay before pp
 case $delayc in
 [Yy]* ) 
 while true; do
-read -p  "$(printf '\033[37mEnter the timeout value [0 - 15]: \033[0m')" DELAYS
+read -p  "$(printf '\r\n\033[37mEnter the timeout value [0 - 15]: \033[0m')" DELAYS
 case $DELAYS in
 "" ) 
-echo -e '\033[31mCannot be empty!\033[0m';;
+echo -e '\r\n\033[31mCannot be empty!\033[0m';;
 * )  
 if grep -q '^[0-9]*$' <<<$DELAYS ; then
 if [[ ! "$DELAYS" =~ ^("0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12"|"13"|"14"|"15")$ ]]  ; then
-echo -e '\033[31mThe value must be between 0 and 15\033[0m';
+echo -e '\r\n\033[31mThe value must be between 0 and 15\033[0m';
 else 
 break;
 fi
 else 
-echo -e '\033[31mThe delay time must only contain a number between 0 and 15\033[0m';
+echo -e '\r\n\033[31mThe delay time must only contain a number between 0 and 15\033[0m';
 fi
 esac
 done
-echo -e '\033[33mDelay start set to '$DELAYS' (seconds)\033[0m'
+echo -e '\r\n\033[33mDelay start set to '$DELAYS' (seconds)\033[0m'
 break;;
 [Nn]* ) 
-echo -e '\033[32mUsing the default setting: 0 (second)\033[0m'
+echo -e '\r\n\033[32mUsing the default setting: 0 (second)\033[0m'
 DELAYS="0"
 break;;
-* ) echo -e '\033[31mPlease answer Y or N\033[0m';;
+* ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
 esac
 done
 
