@@ -193,7 +193,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
 - `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet and shutdown.
- 
+
 ---------------------------------------------------------------------------------------
 
 ## Credit to everyone that made it worked.
