@@ -87,6 +87,12 @@ On your PS4:
 
 Normally the pwn process will success on first or second attempt.
 
+### Optional 2 : Other run script.
+
+I added other script (run2.sh) , if you have a problem to run PPPwn in your device.
+
+Simple rename run2.sh in SDCARD/firmware/PPPwn/ to run.sh.
+
 ---------------------------------------------------------------------------------------
 
 ## Ready to use installed-image.
@@ -197,7 +203,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp) for further details.
 - no-wait-padi, can reduce pwn time but may miss captured package.
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
-- `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet and shutdown.
+- `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device.
 
 ---------------------------------------------------------------------------------------
 

@@ -4,7 +4,6 @@
 
 if [ -f /boot/firmware/PPPwn/PPPwn.tar ] ; then
 sudo tar -xf /boot/firmware/PPPwn/PPPwn.tar -C /boot/firmware/
-sudo rm /boot/firmware/PPPwn/PPPwn.tar
 else
 echo -e '\r\n\033[31mInstall file not found\033[0m'
 exit 1
@@ -272,6 +271,7 @@ Group=root
 Environment=NODE_ENV=production
 [Install]
 WantedBy=multi-user.target' | sudo tee /etc/systemd/system/pipwn.service
+sudo rm /boot/firmware/PPPwn/PPPwn.tar
 sudo chmod u+rwx /etc/systemd/system/pipwn.service
 sudo systemctl enable pipwn
 sudo systemctl start pipwn

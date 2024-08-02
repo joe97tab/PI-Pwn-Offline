@@ -27,6 +27,12 @@ sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/
 sudo chmod 777 /boot/firmware/PPPwn/*.*
 sudo rm -rf /boot/firmware/update/
 
+if [[ ${STAGE2METHOD,,} == "hen" ]] || [[ ${STAGE2METHOD,,} == *"vtx"* ]] ;then
+if [ -f /boot/firmware/PPPwn/stage2/goldhen/stage2_${FIRMWAREVERSION//.}.bin ] ; then
+STAGE2METHOD="goldhen"
+fi
+fi
+
 # creat general config
 echo '#!/bin/bash
 CPPMETHOD="'$CPPMETHOD'"
