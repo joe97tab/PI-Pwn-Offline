@@ -19,6 +19,9 @@ if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
 if [ -z $XFBS ]; then XFBS="0"; fi
 if [ -z $XFNWB ]; then XFNWB=false; fi
+if [ -z $SPRAY_NUM ]; then SPRAY_NUM="1000"; fi
+if [ -z $CORRUPT_NUM ]; then CORRUPT_NUM="1"; fi
+if [ -z $PIN_NUM ]; then PIN_NUM="1000"; fi
 
 sudo mkdir /boot/firmware/update/
 sudo mv /boot/firmware/PPPwn/PPPwn.tar /boot/firmware/update/PPPwn.tar
@@ -33,7 +36,7 @@ STAGE2METHOD="goldhen"
 fi
 fi
 
-# creat general config
+# create general config
 echo '#!/bin/bash
 CPPMETHOD="'$CPPMETHOD'"
 INTERFACE="'$INTERFACE'"
@@ -48,7 +51,10 @@ echo '#!/bin/bash
 XFWAP="'$XFWAP'"
 XFGD="'$XFGD'"
 XFBS="'$XFBS'"
-XFNWB='$XFNWB'' | sudo tee /boot/firmware/PPPwn/pconfig.sh
+XFNWB='$XFNWB'
+SPRAY_NUM="'$SPRAY_NUM'"
+CORRUPT_NUM="'$CORRUPT_NUM'"
+PIN_NUM="'$PIN_NUM'"' | sudo tee /boot/firmware/PPPwn/pconfig.sh
 
 coproc read -t 2 && wait "$!" || true
 sudo reboot

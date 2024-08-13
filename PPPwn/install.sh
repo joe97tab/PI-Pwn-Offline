@@ -21,25 +21,30 @@ echo -e ''
 echo -e '\r\n\033[31mPress Ctrl+C anytime to exit this script\033[0m'
 
 echo -e ''
-echo -e '\033[37mA ) C++ V1 support IPv4 Only (Fastest speed)\033[0m'
-echo -e '\033[37mB ) C++ from stooged complied\033[0m'
-echo -e '\033[37mC ) C++ Lastest from xfangfang (Default)\033[0m'
+echo -e '\033[37m1 ) C++ V1 support IPv4 Only (Fastest speed)\033[0m'
+echo -e '\033[37m2 ) C++ from stooged complied\033[0m'
+echo -e '\033[37m3 ) C++ Lastest from xfangfang (Default)\033[0m'
+echo -e '\033[37m4 ) C++ from nn9dev (1.1b1) added spray, corrupt and pin number\033[0m'
 while true; do
-read -p "$(printf '\r\n\033[37mPlease enter your choice for C++ method (cursed PS4 should select B or C\r\n\r\n\033[37m(A|B|C)?: \033[0m')" cppchoice
+read -p "$(printf '\r\n\033[37mPlease enter your choice for C++ method (cursed PS4 should select 2 or 3 or 4\r\n\r\n\033[37m(1|2|3|4)?: \033[0m')" cppchoice
 case $cppchoice in
-[Aa]* ) 
+[1]* )
 CPPM="v1"
-echo -e '\r\n\033[33mC++ V1 IPv4 Only from xfangfang being used\033[0m'
+echo -e '\r\n\033[32mC++ V1 IPv4 Only from xfangfang being used\033[0m'
 break;;
-[Bb]* ) 
+[2]* ) 
 CPPM="stooged"
 echo -e '\r\n\033[33mC++ from stooged complied is being used\033[0m'
 break;;
-[Cc]* )
+[3]* )
 CPPM="xfangfang"
 echo -e '\r\n\033[32mC++ Lastest from xfangfang is being used\033[0m'
 break;;
-* ) echo -e '\r\n\033[31mPlease answer A or B or C\033[0m';;
+[4]* )
+CPPM="nn9dev"
+echo -e '\r\n\033[32mC++ from nn9dev is being used\033[0m'
+break;;
+* ) echo -e '\r\n\033[31mPlease answer 1 or 2 or 3 or 4\033[0m';;
 esac
 done
 
@@ -65,7 +70,7 @@ echo -e '\r\n\033[31mThe version must only contain alphanumeric characters\033[0
 fi
 esac
 done
-echo -e '\r\n\033[33mYou are using '$FWV'\033[0m'
+echo -e '\r\n\033[32mYou are using '$FWV'\033[0m'
 break;;
 [Nn]* ) 
 echo -e '\r\n\033[32mUsing the default setting: 11.00\033[0m'
@@ -87,7 +92,7 @@ read -p "$(printf '\r\n\033[37mPlease enter your choice for jailbreak method\r\n
 case $s2choice in
 [Aa]* ) 
 if [ -f /boot/firmware/PPPwn/stage2/goldhen/stage2_${FWV//.}.bin ] ; then
-s2method="goldhen"
+S2METHOD="goldhen"
 nostage2=false
 echo -e '\r\n\033[32mGoldHEN is being used\033[0m'
 else
@@ -96,7 +101,7 @@ fi
 break;;
 [Bb]* ) 
 if [ -f /boot/firmware/PPPwn/stage2/vtxhen/stage2_${FWV//.}.bin ] ; then
-s2method="hen"
+S2METHOD="hen"
 nostage2=false
 echo -e '\r\n\033[32mHEN is being used\033[0m'
 else
@@ -104,13 +109,13 @@ echo -e '\r\n\033[31mHEN not support\033[0m'
 fi
 break;;
 [Cc]* ) 
-s2method="flow"
+S2METHOD="flow"
 nostage2=false
 echo -e '\r\n\033[33mTheOfficialFloW is being used\033[0m'
 break;;
 [Dd]* ) 
 if [ -f /boot/firmware/PPPwn/stage2/bestpig/stage2_${FWV//.}.bin ] ; then
-s2method="bestpig"
+S2METHOD="bestpig"
 nostage2=false
 echo -e '\r\n\033[32mHEN by BestPig is being used\033[0m'
 else
@@ -174,6 +179,9 @@ done
 if [[ $CPPM == "v1" ]] ;then
 IPV6STATE="false"
 WNPSTATE="true"
+SPRAYNO="1000"
+CORRUPTNO="1"
+PINNO="1000"
 else
 echo -e '\r\n\033[37mIPv6 slower than IPv4, no need to using IPv6 if pwn work\033[0m'
 while true; do
@@ -181,10 +189,10 @@ read -p "$(printf '\r\n\033[37mAre you using IPv6 for pwn, it will improve curse
 case $useipv in
 [Yy]* ) 
 IPV6STATE="true"
-echo -e '\r\n\033[32mIPv6 is being used\033[0m'
+echo -e '\r\n\033[33mIPv6 is being used\033[0m'
 break;;
 [Nn]* ) 
-echo -e '\r\n\033[33mIPv4 is being used\033[0m'
+echo -e '\r\n\033[32mIPv4 is being used\033[0m'
 IPV6STATE="false"
 break;;
 * ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
@@ -207,6 +215,106 @@ break;;
 * ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
 esac
 done
+
+if [[ $CPPM == "nn9dev" ]] ;then
+while true; do
+read -p "$(printf '\r\n\033[37mWould you like to change the Spray Number (Hex), the default is 0x1000\r\n\033[37m(Y|N)?: \033[0m')" sprayc
+case $sprayc in
+[Yy]* ) 
+while true; do
+read -p  "$(printf '\r\n\033[37mEnter the Spray Number [1000 - 1250]: \033[0m')" SPRAYNO
+case $SPRAYNO in
+"" ) 
+echo -e '\r\n\033[31mCannot be empty!\033[0m';;
+* )  
+if grep -q '^[0-9]*$' <<<$SPRAYNO ; then
+if [[ $((SPRAYNO)) -lt 1000 ]] || [[ $((SPRAYNO)) -gt 1250 ]]; then
+echo -e '\r\n\033[31mThe value must be between 1000 and 1250\033[0m';
+else 
+break;
+fi
+else 
+echo -e '\r\n\033[31mSpray Number must only contain a number between 1000 and 1250\033[0m';
+fi
+esac
+done
+echo -e '\r\n\033[33mSpray Number (Hex) set to 0x'$SPRAYNO'\033[0m'
+break;;
+[Nn]* ) 
+echo -e '\r\n\033[32mUsing the default setting: 0x1000\033[0m'
+SPRAYNO="1000"
+break;;
+* ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
+esac
+done
+
+while true; do
+read -p "$(printf '\r\n\033[37mWould you like to change the Corrupt Number (Hex), the default is 0x1\r\n\033[37m(Y|N)?: \033[0m')" corruptc
+case $corruptc in
+[Yy]* ) 
+while true; do
+read -p  "$(printf '\r\n\033[37mEnter the Corrupt Number [1 - 40]: \033[0m')" CORRUPTNO
+case $CORRUPTNO in
+"" ) 
+echo -e '\r\n\033[31mCannot be empty!\033[0m';;
+* )  
+if grep -q '^[0-9]*$' <<<$CORRUPTNO ; then
+if [[ $((CORRUPTNO)) -lt 1 ]] || [[ $((CORRUPTNO)) -gt 40 ]]; then
+echo -e '\r\n\033[31mThe value must be between 1 and 40\033[0m';
+else 
+break;
+fi
+else 
+echo -e '\r\n\033[31mCorrupt Number must only contain a number between 1 and 40\033[0m';
+fi
+esac
+done
+echo -e '\r\n\033[33mCorrupt Number (Hex) set to 0x'$CORRUPTNO'\033[0m'
+break;;
+[Nn]* ) 
+echo -e '\r\n\033[32mUsing the default setting: 0x1\033[0m'
+CORRUPTNO="1"
+break;;
+* ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
+esac
+done
+
+while true; do
+read -p "$(printf '\r\n\033[37mWould you like to change the Pin Number (Hex), the default is 0x1000\r\n\033[37m(Y|N)?: \033[0m')" pinc
+case $pinc in
+[Yy]* ) 
+while true; do
+read -p  "$(printf '\r\n\033[37mEnter the Pin Number [1000 - 2000]: \033[0m')" PINNO
+case $PINNO in
+"" ) 
+echo -e '\r\n\033[31mCannot be empty!\033[0m';;
+* )  
+if grep -q '^[0-9]*$' <<<$PINNO ; then
+if [[ $((PINNO)) -lt 1000 ]] || [[ $((PINNO)) -gt 2000 ]]; then
+echo -e '\r\n\033[31mThe value must be between 1000 and 2000\033[0m';
+else 
+break;
+fi
+else 
+echo -e '\r\n\033[31mPin Number must only contain a number between 1000 and 2000\033[0m';
+fi
+esac
+done
+echo -e '\r\n\033[33mPin Number (Hex) set to 0x'$PINNO'\033[0m'
+break;;
+[Nn]* ) 
+echo -e '\r\n\033[32mUsing the default setting: 0x1000\033[0m'
+PINNO="1000"
+break;;
+* ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
+esac
+done
+
+else
+SPRAYNO="1000"
+CORRUPTNO="1"
+PINNO="1000"
+fi
 fi
 
 while true; do
@@ -214,13 +322,14 @@ read -p "$(printf '\r\n\033[37mWould you like to change the time delay before pp
 case $delayc in
 [Yy]* ) 
 while true; do
-read -p  "$(printf '\r\n\033[37mEnter the timeout value [0 - 15]: \033[0m')" DELAYS
+read -p  "$(printf '\r\n\033[37mEnter the delay start value [0 - 15]: \033[0m')" DELAYS
 case $DELAYS in
 "" ) 
 echo -e '\r\n\033[31mCannot be empty!\033[0m';;
 * )  
 if grep -q '^[0-9]*$' <<<$DELAYS ; then
-if [[ ! "$DELAYS" =~ ^("0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12"|"13"|"14"|"15")$ ]]  ; then
+if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 15 ]]; then
+#if [[ ! "$DELAYS" =~ ^("0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12"|"13"|"14"|"15")$ ]]  ; then
 echo -e '\r\n\033[31mThe value must be between 0 and 15\033[0m';
 else 
 break;
@@ -248,7 +357,7 @@ CPPMETHOD="'$CPPM'"
 INTERFACE="'$IFCE'"
 FIRMWAREVERSION="'$FWV'"
 USBETHERNET='$USBE'
-STAGE2METHOD="'$s2method'"
+STAGE2METHOD="'$S2METHOD'"
 USEIPV6='$IPV6STATE'
 DELAYSTART="'$DELAYS'"' | sudo tee /boot/firmware/PPPwn/config.sh
 
@@ -257,7 +366,10 @@ echo '#!/bin/bash
 XFWAP="1"
 XFGD="4"
 XFBS="0"
-XFNWB='$WNPSTATE'' | sudo tee /boot/firmware/PPPwn/pconfig.sh
+XFNWB='$WNPSTATE'
+SPRAY_NUM="'$SPRAYNO'"
+CORRUPT_NUM="'$CORRUPTNO'"
+PIN_NUM="'$PINNO'"' | sudo tee /boot/firmware/PPPwn/pconfig.sh
 
 sudo rm /usr/lib/systemd/system/bluetooth.target
 sudo rm /usr/lib/systemd/system/network-online.target
