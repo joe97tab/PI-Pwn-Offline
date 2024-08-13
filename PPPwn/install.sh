@@ -21,16 +21,16 @@ echo -e ''
 echo -e '\r\n\033[31mPress Ctrl+C anytime to exit this script\033[0m'
 
 echo -e ''
-echo -e '\033[37m1 ) C++ V1 support IPv4 Only (Fastest speed)\033[0m'
+echo -e '\033[37m1 ) C++ V1 support old IPv6 Only (Fastest speed)\033[0m'
 echo -e '\033[37m2 ) C++ from stooged complied\033[0m'
 echo -e '\033[37m3 ) C++ Lastest from xfangfang (Default)\033[0m'
 echo -e '\033[37m4 ) C++ from nn9dev (1.1b1) added spray, corrupt and pin number\033[0m'
 while true; do
-read -p "$(printf '\r\n\033[37mPlease enter your choice for C++ method (cursed PS4 should select 2 or 3 or 4\r\n\r\n\033[37m(1|2|3|4)?: \033[0m')" cppchoice
+read -p "$(printf '\r\n\033[37mPlease enter your choice for C++ method (cursed PS4 should select 2 or 3\r\n\r\n\033[37m(1|2|3|4)?: \033[0m')" cppchoice
 case $cppchoice in
 [1]* )
 CPPM="v1"
-echo -e '\r\n\033[32mC++ V1 IPv4 Only from xfangfang being used\033[0m'
+echo -e '\r\n\033[32mC++ V1 old IPv6 Only from xfangfang being used\033[0m'
 break;;
 [2]* ) 
 CPPM="stooged"
@@ -183,16 +183,16 @@ SPRAYNO="1000"
 CORRUPTNO="1"
 PINNO="1000"
 else
-echo -e '\r\n\033[37mIPv6 slower than IPv4, no need to using IPv6 if pwn work\033[0m'
+echo -e '\r\n\033[37mNew IPv6 slower than old IPv6, no need to using new IPv6 if pwn work\033[0m'
 while true; do
-read -p "$(printf '\r\n\033[37mAre you using IPv6 for pwn, it will improve cursed PS4\r\n\r\n\033[37m(Y|N)?: \033[0m')" useipv
+read -p "$(printf '\r\n\033[37mAre you using new IPv6 for pwn, it will improve cursed PS4\r\n\r\n\033[37m(Y|N)?: \033[0m')" useipv
 case $useipv in
 [Yy]* ) 
 IPV6STATE="true"
-echo -e '\r\n\033[33mIPv6 is being used\033[0m'
+echo -e '\r\n\033[33mNew IPv6 is being used\033[0m'
 break;;
 [Nn]* ) 
-echo -e '\r\n\033[32mIPv4 is being used\033[0m'
+echo -e '\r\n\033[32mOld IPv6 is being used\033[0m'
 IPV6STATE="false"
 break;;
 * ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
@@ -358,7 +358,7 @@ INTERFACE="'$IFCE'"
 FIRMWAREVERSION="'$FWV'"
 USBETHERNET='$USBE'
 STAGE2METHOD="'$S2METHOD'"
-USEIPV6='$IPV6STATE'
+NEWIPV6='$IPV6STATE'
 DELAYSTART="'$DELAYS'"' | sudo tee /boot/firmware/PPPwn/config.sh
 
 # create pppwn c++ config

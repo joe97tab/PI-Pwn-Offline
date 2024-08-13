@@ -129,7 +129,7 @@ If you see "Ready for console connection" it means your device ready for pppwn, 
 - Power your device, it will auto update and reconfig from previous setup then reboot.
 - If something go wrong, check config.sh and pconfig.sh, use notepad++ to edit your desire value.
 
-Please keep in mind that pwn your PS4 with IPv4 address is faster than IPv6.
+Please keep in mind that pwn your PS4 with old IPv6 address is faster than new IPv6.
 It's better to use it if your PS4 support.
 
 ## config.sh, pconfig.sh
@@ -138,12 +138,12 @@ Config file location : SDCARD/firmware/PPPwn/
 
 | config.sh | Description |
 | --- | --- |
-| CPPMETHOD="1" | 1 = v1 IPv4 Only (fastest speed), 2 = stooged binary, 3 = lastest xfangfang binary, 4 = nn9dev binary |
+| CPPMETHOD="1" | 1 = v1 Old IPv6 Only (fastest speed), 2 = stooged binary, 3 = lastest xfangfang binary, 4 = nn9dev binary |
 | INTERFACE="eth0" | eth0, eth1, end0, etc |
 | FIRMWAREVERSION="10.71" | your current firmware |
 | USBETHERNET=false | set to true if using external usb ethernet |
 | STAGE2METHOD="goldhen" | goldhen, hen, bestpig (10.50 Only) and flow |
-| USEIPV6=false | false = using IPv4 (faster), true = for cursed ps4 |
+| NEWIPV6=false | false = using old IPv6 (faster), true = for cursed ps4 |
 | DELAYSTART="0" | delay time before pppwn start, set value between 0-15 seconds |
 
 `CPPMETHOD` If incorrect cpp setup it will use lastest xfangfang binary.
@@ -152,7 +152,7 @@ Stooged binary (CPPMETHOD="2") had intregrated stage1, stage2 and hen-vtx into t
 
 Nn9dev binary (CPPMETHOD="4") added new feature it added spray number, corrupt number and pin number, it hopes to improve stability.
 
-| CPPMETHOD | Description | IPv4 | IPv6 | wait-after-pin | groom-delay | buffer-size | no-wait-padi | spray no. | corrupt no. | pin no. |
+| CPPMETHOD | - | Old IPv6 | New IPv6 | wait-after-pin | groom-delay | buffer-size | no-wait-padi | spray no. | corrupt no. | pin no. |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | v1 | o | x | x | x | x | x | x | x | x |
 | 2 | stooged | o | o | o | o | o | o | x | x | x |
@@ -213,8 +213,8 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 | 7.01 | x | o | o |
 | 7.00 | x | o | o |
 
-- First, use IPv6 address (CPPMETHOD="2" or CPPMETHOD="3"), USEIPV6=true and TheOfficialFloW (STAGE2METHOD="flow") to pwn PS4.
-- If it worked then change to IPv4 address (USEIPV6=false).
+- First, use new IPv6 address (CPPMETHOD="2" or CPPMETHOD="3"), NEWIPV6=true and TheOfficialFloW (STAGE2METHOD="flow") to pwn PS4.
+- If it worked then change to old IPv6 address (NEWIPV6=false).
 - If your ps4 not cursed then change `CPPMETHOD` to "1".
 - Then set `STAGE2METHOD` to GoldHEN or HEN depend on your firmware version.
 - HEN is enough if you only run homebrew or fpkg game, no need to using GoldHEN, firmware lower the better.
@@ -222,7 +222,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
 - `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device.
-- `CPPMETHOD="4"` My PS4 (not cursed) crashed a lot when set IPv6 to false, use this method if you can't pwn your PS4.
+- `CPPMETHOD="4"` My PS4 (not cursed) crashed a lot when set NEWIPV6 to false, use this method if you can't pwn your PS4.
 
 ---------------------------------------------------------------------------------------
 
