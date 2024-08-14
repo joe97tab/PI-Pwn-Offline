@@ -62,7 +62,7 @@ It will create config.sh, pconfig.sh and auto run script (run.sh) when boot the 
 
 Reduced boot time and increased overall speed by disable some services.
 
-Please run this script before run install.sh, copy all files from /tuning/ to /firmware/PPPwn/.
+Please run this script before run install.sh, copy `speedup_raspbian.sh` or `speedup_armbian.sh` from /tuning/ to /firmware/PPPwn/.
 
 Raspbian :
 
@@ -129,6 +129,7 @@ If you see "Ready for console connection" it means your device ready for pppwn, 
 - Power your device, it will auto update and reconfig from previous setup then continue pwn PS4 (no need to reboot).
 - If GoldHEN avialable it will auto switch from HEN to GoldHEN.
 - If something go wrong, check config.sh and pconfig.sh, use notepad++ to edit your desire value.
+- Configuration file templates locate in /tuning/.
 
 Please keep in mind that pwn your PS4 with old IPv6 address is faster than new IPv6.
 

@@ -60,5 +60,5 @@ SPRAY_NUM="'$SPRAY_NUM'"
 CORRUPT_NUM="'$CORRUPT_NUM'"
 PIN_NUM="'$PIN_NUM'"' | sudo tee /boot/firmware/PPPwn/pconfig.sh
 
-coproc read -t 1 && wait "$!" || true
+coproc read -t 4 && wait "$!" || true
 sudo systemctl restart pipwn

@@ -1,0 +1,8 @@
+#!/bin/bash
+XFWAP="1"
+XFGD="4"
+XFBS="0"
+XFNWB=true
+SPRAY_NUM="1000"
+CORRUPT_NUM="1"
+PIN_NUM="1000"
