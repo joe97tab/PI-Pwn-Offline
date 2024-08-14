@@ -126,10 +126,12 @@ If you see "Ready for console connection" it means your device ready for pppwn, 
 ## How to update
 
 - On PC, Insert SDCARD, copy and replace files `/update/run.sh` and `/PPPwn/PPPwn.tar` to SDCARD/firmware/PPPwn/.
-- Power your device, it will auto update and reconfig from previous setup then reboot.
+- Power your device, it will auto update and reconfig from previous setup then continue pwn PS4 (no need to reboot).
+- If GoldHEN avialable it will auto switch from HEN to GoldHEN.
 - If something go wrong, check config.sh and pconfig.sh, use notepad++ to edit your desire value.
 
 Please keep in mind that pwn your PS4 with old IPv6 address is faster than new IPv6.
+
 It's better to use it if your PS4 support.
 
 ## config.sh, pconfig.sh

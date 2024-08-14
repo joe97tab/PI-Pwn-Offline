@@ -12,7 +12,11 @@ if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
 if [ -z $STAGE2METHOD ]; then STAGE2METHOD="flow"; fi
-if [ -z $NEWIPV6 ]; then NEWIPV6=false; fi
+if [ -z $USEIPV6 ]; then
+if [ -z $NEWIPV6 ]; then NEWIPV6=true; fi
+else
+NEWIPV6=$USEIPV6
+fi
 if [ -z $DELAYSTART ]; then DELAYSTART="0"; fi
 
 if [ -z $XFWAP ]; then XFWAP="1"; fi
@@ -56,5 +60,5 @@ SPRAY_NUM="'$SPRAY_NUM'"
 CORRUPT_NUM="'$CORRUPT_NUM'"
 PIN_NUM="'$PIN_NUM'"' | sudo tee /boot/firmware/PPPwn/pconfig.sh
 
-coproc read -t 2 && wait "$!" || true
-sudo reboot
+coproc read -t 1 && wait "$!" || true
+sudo systemctl restart pipwn
