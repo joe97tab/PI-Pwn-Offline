@@ -30,7 +30,7 @@ read -p "$(printf '\r\n\033[37mPlease enter your choice for C++ method (cursed P
 case $cppchoice in
 [1]* )
 CPPM="v1"
-echo -e '\r\n\033[32mC++ V1 old IPv6 Only from xfangfang being used\033[0m'
+echo -e '\r\n\033[32mC++ Version 1.0.0 for old IPv6 Only from xfangfang being used\033[0m'
 break;;
 [2]* ) 
 CPPM="stooged"
@@ -56,8 +56,8 @@ while true; do
 read -p  "$(printf '\r\n\033[37mEnter the firmware version [ 7.00 | 7.01 | 7.02 | 7.50 | 7.51 | 7.55 | 8.00 | 8.01 | 8.03 | 8.50 | 8.52 | 9.00 | 9.03 | 9.04 | 9.50 | 9.51 | 9.60 | 10.00 | 10.01 | 10.50 | 10.70 | 10.71 | 11.00 ]: \033[0m')" FWV
 case $FWV in
 "" ) 
- echo -e '\r\n\033[31mCannot be empty!\033[0m';;
- * )  
+echo -e '\r\n\033[31mCannot be empty!\033[0m';;
+* )  
 if grep -q '^[0-9.]*$' <<<$FWV ; then 
 
 if [[ ! "$FWV" =~ ^("7.00"|"7.01"|"7.02"|"7.50"|"7.51"|"7.55"|"8.00"|"8.01"|"8.03"|"8.50"|"8.52"|"9.00"|"9.03"|"9.04"|"9.50"|"9.51"|"9.60"|"10.00"|"10.01"|"10.50"|"10.70"|"10.71"|"11.00")$ ]]  ; then
@@ -153,8 +153,8 @@ while true; do
 read -p  "$(printf '\r\n\033[37mEnter the interface value: \033[0m')" IFCE
 case $IFCE in
 "" ) 
- echo -e '\r\n\033[31mCannot be empty!\033[0m';;
- * )  
+echo -e '\r\n\033[31mCannot be empty!\033[0m';;
+* )  
 if grep -q '^[0-9a-zA-Z_ -]*$' <<<$IFCE ; then 
 if [ ${#IFCE} -le 1 ]  || [ ${#IFCE} -ge 17 ] ; then
 echo -e '\r\n\033[31mThe interface must be between 2 and 16 characters long\033[0m';
@@ -329,7 +329,6 @@ echo -e '\r\n\033[31mCannot be empty!\033[0m';;
 * )  
 if grep -q '^[0-9]*$' <<<$DELAYS ; then
 if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 15 ]]; then
-#if [[ ! "$DELAYS" =~ ^("0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12"|"13"|"14"|"15")$ ]]  ; then
 echo -e '\r\n\033[31mThe value must be between 0 and 15\033[0m';
 else 
 break;

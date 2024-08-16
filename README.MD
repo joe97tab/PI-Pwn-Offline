@@ -101,19 +101,19 @@ Simple rename run2.sh in SDCARD/firmware/PPPwn/ to run.sh.
 
 Very easy to setup. Write image, edit config.sh, pconfig.sh then test your pwn.
 
-- Raspberry pi offline image (should work up to pi4) (05/06/2024) :
+- Raspberry pi offline image (should work up to pi4) (16/08/2024) (4GB SDCARD or above):
 
 [gdrive](https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view)
 
 
-- Armbian amlogic s9xx offline image (bookworm) (06/06/2024) :
+- Armbian amlogic s9xx offline image (bookworm) (16/08/2024) (4GB SDCARD or above):
 
 May not work correctly with some S912 devices.
 It also supports S905x3 (not test).
 
 [gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view)
 
-- Armbian amlogic s9xx offline image (jammy) (28/06/2024) :
+- Armbian amlogic s9xx offline image (jammy) (16/08/2024) (2GB SDCARD or above):
 
 Work with s912, s905x3 may not works.
 
@@ -149,6 +149,8 @@ Config file location : SDCARD/firmware/PPPwn/
 | NEWIPV6=false | false = using old IPv6 (faster), true = for cursed ps4 |
 | DELAYSTART="0" | delay time before pppwn start, set value between 0-15 seconds |
 
+`DELAYSTART` uses for adjust your device to ready for pppwn after ps4 finish boot to home screen. 
+
 `CPPMETHOD` If incorrect cpp setup it will use lastest xfangfang binary.
 
 Stooged binary (CPPMETHOD="2") had intregrated stage1, stage2 and hen-vtx into the binary, for hen-vtx, no need to place payload.bin onto the root of a usb drive.
@@ -175,9 +177,9 @@ If incorrect pconfig setup it will use default value.
 
 | pconfig.sh | Description |
 | --- | --- |
-| XFWAP="1" | --wait-after-pin |
-| XFGD="4" | --groom-delay |
-| XFBS="0" | --buffer-size |
+| XFWAP="1" | --wait-after-pin, set value between 1-20 seconds|
+| XFGD="4" | --groom-delay, set value between 1-4097 ms |
+| XFBS="0" | --buffer-size, set value between 0-20480 |
 | XFNWB=true | -no-wait-padi , set to false if encounter a problem |
 | SPRAY_NUM="1000" | set value between 1000-1250, for CPPMETHOD="4" Only |
 | CORRUPT_NUM="1" | set value between 1-40, for CPPMETHOD="4" Only |
@@ -218,9 +220,10 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 
 - First, use new IPv6 address (CPPMETHOD="2" or CPPMETHOD="3"), NEWIPV6=true and TheOfficialFloW (STAGE2METHOD="flow") to pwn PS4.
 - If it worked then change to old IPv6 address (NEWIPV6=false).
-- If your ps4 not cursed then change `CPPMETHOD` to "1".
+- If it worked your ps4 may not cursed then change `CPPMETHOD` to "1".
 - Then set `STAGE2METHOD` to GoldHEN or HEN depend on your firmware version.
 - HEN is enough if you only run homebrew or fpkg game, no need to using GoldHEN, firmware lower the better.
+- HEN now supports [Payload Guest](https://github.com/Al-Azif/ps4-payload-guest/releases), put payloads in USB/payloads/ or PS4/data/payloads/.
 - no-wait-padi, can reduces pwn time but may miss captured package.
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
