@@ -177,10 +177,10 @@ If incorrect pconfig setup it will use default value.
 
 | pconfig.sh | Description |
 | --- | --- |
-| XFWAP="1" | --wait-after-pin, set value between 1-20 seconds|
-| XFGD="4" | --groom-delay, set value between 1-4097 ms |
-| XFBS="0" | --buffer-size, set value between 0-20480 |
-| XFNWB=true | -no-wait-padi , set to false if encounter a problem |
+| XFWAP="1" | wait-after-pin, set value between 1-20 seconds|
+| XFGD="4" | groom-delay, set value between 1-4097 ms |
+| XFBS="0" | buffer-size, set value between 0-20480 |
+| XFNWB=true | no-wait-padi , set to false if encounter a problem |
 | SPRAY_NUM="1000" | set value between 1000-1250, for CPPMETHOD="4" Only |
 | CORRUPT_NUM="1" | set value between 1-40, for CPPMETHOD="4" Only |
 | PIN_NUM="1000" | set value between 1000-2000, for CPPMETHOD="4" Only |
@@ -223,7 +223,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 - If it worked your ps4 may not cursed then change `CPPMETHOD` to "1".
 - Then set `STAGE2METHOD` to GoldHEN or HEN depend on your firmware version.
 - HEN is enough if you only run homebrew or fpkg game, no need to using GoldHEN, firmware lower the better.
-- HEN now supports [Payload Guest](https://github.com/Al-Azif/ps4-payload-guest/releases), put payloads in USB/payloads/ or PS4/data/payloads/.
+- HEN now supports [Payload Guest](https://github.com/Al-Azif/ps4-payload-guest/releases), put payloads in USB/payloads/ or PS4HDD/data/payloads/.
 - no-wait-padi, can reduces pwn time but may miss captured package.
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
