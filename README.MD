@@ -223,7 +223,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 - If it worked your ps4 may not cursed then change `CPPMETHOD` to "1".
 - Then set `STAGE2METHOD` to GoldHEN or HEN depend on your firmware version.
 - HEN is enough if you only run homebrew or fpkg game, no need to using GoldHEN, firmware lower the better.
-- HEN now supports [Payload Guest](https://github.com/Al-Azif/ps4-payload-guest/releases), put payloads in USB/payloads/ or PS4HDD/data/payloads/.
+- HEN now supports [Payload Guest](https://github.com/Al-Azif/ps4-payload-guest/releases), put [payloads](https://github.com/TheWizWikii/All-PS4-Payloads) that match your FW in USB/payloads/ or PS4HDD/data/payloads/.
 - no-wait-padi, can reduces pwn time but may miss captured package.
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
