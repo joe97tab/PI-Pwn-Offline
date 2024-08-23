@@ -210,7 +210,6 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 | 8.03 | x | o | o |
 | 8.01 | x | o | o |
 | 8.00 | x | o | o |
-| 8.01 | x | o | o |
 | 7.55 | x | o | o |
 | 7.51 | x | o | o |
 | 7.50 | x | o | o |
@@ -229,6 +228,20 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
 - `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device.
 - `CPPMETHOD="4"` My PS4 (not cursed) crashed a lot when set NEWIPV6 to false, use this method if you can't pwn your PS4.
+
+---------------------------------------------------------------------------------------
+
+## Useful Homebrew
+
+- PS4 file manager : [PS4-Xplorer](https://pkg-zone.com/details/LAPY20009)
+- Payload Guest for inject payloads : [Payload Guest](https://github.com/Al-Azif/ps4-payload-guest/releases)
+- Save Tool : [Apollo Save Tool](https://github.com/bucanero/apollo-ps4)
+- Game Manager : [ItemzFlow](https://github.com/LightningMods/Itemzflow)
+- GoldHEN Cheat : [chronoss09](https://github.com/chronoss09/GoldHen-Cheats-PKG/releases)
+- PS4's APU Temp Unity : [PS4 Temperature](https://pkg-zone.com/details/LAPY20006)
+- Video Player for the PS4 : [PS4 Player](https://pkg-zone.com/details/LAPY20002)
+- Great Homebrew from : [Lapy](https://pkg-zone.com/?author=Lapy)
+- Emulator : [pEMU](https://github.com/Cpasjuste/pemu/releases)
 
 ---------------------------------------------------------------------------------------
 

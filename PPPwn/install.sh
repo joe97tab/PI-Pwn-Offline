@@ -19,6 +19,8 @@ echo -e '\033[37mC++ Port            : xfangfang\033[0m'
 echo -e '\033[37mMod By              : joe97tab\033[0m'
 echo -e ''
 echo -e '\r\n\033[31mPress Ctrl+C anytime to exit this script\033[0m'
+echo -e ''
+echo -e '\r\n\032[31mYou can input lowercase letter choice\033[0m'
 
 echo -e ''
 echo -e '\033[37m1 ) C++ V1 support old IPv6 Only (Fastest speed)\033[0m'
@@ -88,7 +90,7 @@ echo -e '\033[37mD ) HEN by BestPig (FW 10.50 Only)\033[0m'
 nostage2=true
 while $nostage2; do
 while true; do
-read -p "$(printf '\r\n\033[37mPlease enter your choice for jailbreak method\r\n\r\n\033[37m(A|B|C|D)?: \033[0m')" s2choice
+read -p "$(printf '\r\n\033[37mPlease enter your choice for jailbreak method\r\n\033[37m(A|B|C|D)?: \033[0m')" s2choice
 case $s2choice in
 [Aa]* ) 
 if [ -f /boot/firmware/PPPwn/stage2/goldhen/stage2_${FWV//.}.bin ] ; then
@@ -128,7 +130,7 @@ done
 done
 
 while true; do
-read -p "$(printf '\r\n\033[37mAre you using a usb to ethernet adapter for the console connection\r\n\r\n\033[37m(Y|N)?: \033[0m')" usbeth
+read -p "$(printf '\r\n\033[37mAre you using a usb to ethernet adapter for the console connection\r\n\033[37m(Y|N)?: \033[0m')" usbeth
 case $usbeth in
 [Yy]* ) 
 USBE="true"
@@ -142,11 +144,25 @@ break;;
 esac
 done
 
-echo -e ''
-ip link
+INUM=0
+echo -e '\r\n  \033[44m\033[97m Interface list \033[0m\r\n'
+readarray -t difcearr  < <(sudo ip link | cut -d " " -f-2 | cut -d ":" -f2-2)
+for difce in "${difcearr[@]}"; do
+if [ ! -z $difce ]; then
+if [ $difce != "lo" ] && [[ $difce != *"ppp"* ]] && [[ ! $difce == *"wlan"* ]]; then
+if [ -z $DEFIFCE ]; then
+DEFIFCE=${difce/ /}
+fi
+fi
+echo -e $INUM': \033[33m'${difce/ /}'\033[0m'
+interfaces+=(${difce/ /})
+((INUM++))
+fi
+done
+echo -e '\r\n\033[35mDetected lan interface: \033[33m'$DEFIFCE'\033[0m'
 
 while true; do
-read -p "$(printf '\r\n\033[37mWould you like to change the lan interface, the default is eth0\r\n\r\n\033[37m(Y|N)?: \033[0m')" ifset
+read -p "$(printf '\r\n\033[37mWould you like to change the lan interface, N = Using detected lan interface\r\n\033[37m(Y|N)?: \033[0m')" ifset
 case $ifset in
 [Yy]* ) 
 while true; do
@@ -169,8 +185,8 @@ done
 echo -e '\r\n\033[33mYou are using '$IFCE'\033[0m'
 break;;
 [Nn]* ) 
-echo -e '\r\n\033[32mUsing the default setting: eth0\033[0m'
-IFCE="eth0"
+echo -e '\r\n\033[32mUsing the detected setting: \033[33m'$DEFIFCE'\033[0m'
+IFCE=$DEFIFCE
 break;;
 * ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
 esac
@@ -185,7 +201,7 @@ PINNO="1000"
 else
 echo -e '\r\n\033[37mNew IPv6 slower than old IPv6, no need to using new IPv6 if pwn work\033[0m'
 while true; do
-read -p "$(printf '\r\n\033[37mAre you using new IPv6 for pwn, it will improve cursed PS4\r\n\r\n\033[37m(Y|N)?: \033[0m')" useipv
+read -p "$(printf '\r\n\033[37mAre you using new IPv6 for pwn, it will improve cursed PS4\r\n\033[37m(Y|N)?: \033[0m')" useipv
 case $useipv in
 [Yy]* ) 
 IPV6STATE="true"
@@ -202,7 +218,7 @@ done
 echo -e '\r\n\033[37mDont wait one more PADI before starting the exploit\033[0m'
 echo -e '\033[37mBy default, will wait for two PADI request, according to TheOfficialFloW this helps to improve stability but slow pwn process\033[0m'
 while true; do
-read -p "$(printf '\r\n\033[37mDo you want to using wait two PADI, the default is enable\r\n\r\n\033[37m(Y|N)?: \033[0m')" wnp
+read -p "$(printf '\r\n\033[37mDo you want to using wait two PADI, the default is enable\r\n\033[37m(Y|N)?: \033[0m')" wnp
 case $wnp in
 [Yy]* ) 
 echo -e '\r\n\033[33mWait two PADI\033[0m'
@@ -387,4 +403,8 @@ sudo chmod u+rwx /etc/systemd/system/pipwn.service
 sudo systemctl enable pipwn
 sudo systemctl start pipwn
 echo -e '\033[37mInstall complete\033[0m'
-#sudo reboot
+echo -e ''
+echo -e '\r\n\032[31mRun : sudo poweroff : to shutdown the device\033[0m'
+echo -e '\r\n\032[31mor\033[0m' 
+echo -e '\r\n\032[31mPress Ctrl+C to stop pppwn\033[0m'
+
