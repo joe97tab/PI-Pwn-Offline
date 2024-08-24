@@ -101,23 +101,13 @@ Simple rename run2.sh in SDCARD/firmware/PPPwn/ to run.sh.
 
 Very easy to setup. Write image, edit config.sh, pconfig.sh then test your pwn.
 
-- Raspberry pi offline image (should work up to pi4) (16/08/2024) (4GB SDCARD or above):
+Lastest update : 16/08/2024
 
-[gdrive](https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view)
-
-
-- Armbian amlogic s9xx offline image (bookworm) (16/08/2024) (4GB SDCARD or above):
-
-May not work correctly with some S912 devices.
-It also supports S905x3 (not test).
-
-[gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view)
-
-- Armbian amlogic s9xx offline image (jammy) (16/08/2024) (2GB SDCARD or above):
-
-Work with s912, s905x3 may not works.
-
-[gdrive](https://drive.google.com/file/d/1mxTshlN3Tv2iloabUE5FnuMjext5IycF/view)
+| Offline image | distro | SDCARD | Download |
+| --- | --- | --- | --- |
+| Raspberry pi | buster, up to pi4| 4GB or above | [gdrive](https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view) |
+| Armbian amlogic | bookworm, s912 may not work | 4GB or above | [gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view) |
+| Armbian amlogic | jammy, s905x3 may not work | 2GB or above | [gdrive](https://drive.google.com/file/d/1mxTshlN3Tv2iloabUE5FnuMjext5IycF/view) |
 
 If you see "Ready for console connection" it means your device ready for pppwn, please update the lastest script in the section `How to update`.
 
@@ -147,7 +137,7 @@ Config file location : SDCARD/firmware/PPPwn/
 | USBETHERNET=false | set to true if using external usb ethernet |
 | STAGE2METHOD="goldhen" | goldhen, hen, bestpig (10.50 Only) and flow |
 | NEWIPV6=false | false = using old IPv6 (faster), true = for cursed ps4 |
-| DELAYSTART="0" | delay time before pppwn start, set value between 0-15 seconds |
+| DELAYSTART="0" | delay time before pppwn start, set value between 0-20 seconds |
 
 `DELAYSTART` uses for adjust your device to ready for pppwn after ps4 finish boot to home screen. 
 
@@ -181,11 +171,12 @@ If incorrect pconfig setup it will use default value.
 | XFGD="4" | groom-delay, set value between 1-4097 ms |
 | XFBS="0" | buffer-size, set value between 0-20480 |
 | XFNWB=true | no-wait-padi , set to false if encounter a problem |
-| SPRAY_NUM="1000" | set value between 1000-1250, for CPPMETHOD="4" Only |
-| CORRUPT_NUM="1" | set value between 1-40, for CPPMETHOD="4" Only |
-| PIN_NUM="1000" | set value between 1000-2000, for CPPMETHOD="4" Only |
+| For | CPPMETHOD="4" Only |
+| SPRAY_NUM="1000" | set value between 400-1500 (1000, 1050, 1100, 1150,... ) |
+| CORRUPT_NUM="1" | set value 1, 2, 4, 6, 8, 10, 14, 20, 30, 40 |
+| PIN_NUM="1000" | it's fine to leave this at default |
 
-See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github.com/nn9dev/PPPwn_cpp/releases), [PPPwn-Tinker-GUI](https://github.com/DrYenyen/PPPwn-Tinker-GUI) for further details.
+See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github.com/nn9dev/PiPiPenetrate) for further details.
 
 ---------------------------------------------------------------------------------------
 

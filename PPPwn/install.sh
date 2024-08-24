@@ -233,24 +233,27 @@ esac
 done
 
 if [[ $CPPM == "nn9dev" ]] ;then
+
+PINNO="1000"
+
 while true; do
 read -p "$(printf '\r\n\033[37mWould you like to change the Spray Number (Hex), the default is 0x1000\r\n\033[37m(Y|N)?: \033[0m')" sprayc
 case $sprayc in
 [Yy]* ) 
 while true; do
-read -p  "$(printf '\r\n\033[37mEnter the Spray Number [1000 - 1250]: \033[0m')" SPRAYNO
+read -p  "$(printf '\r\n\033[37mEnter the Spray Number [400 - 1500]: \033[0m')" SPRAYNO
 case $SPRAYNO in
 "" ) 
 echo -e '\r\n\033[31mCannot be empty!\033[0m';;
 * )  
 if grep -q '^[0-9]*$' <<<$SPRAYNO ; then
-if [[ $((SPRAYNO)) -lt 1000 ]] || [[ $((SPRAYNO)) -gt 1250 ]]; then
-echo -e '\r\n\033[31mThe value must be between 1000 and 1250\033[0m';
+if [[ $((SPRAYNO)) -lt 400 ]] || [[ $((SPRAYNO)) -gt 1500 ]]; then
+echo -e '\r\n\033[31mThe value must be between 400 and 1500\033[0m';
 else 
 break;
 fi
 else 
-echo -e '\r\n\033[31mSpray Number must only contain a number between 1000 and 1250\033[0m';
+echo -e '\r\n\033[31mSpray Number must only contain a number between 400 and 1500\033[0m';
 fi
 esac
 done
@@ -269,7 +272,7 @@ read -p "$(printf '\r\n\033[37mWould you like to change the Corrupt Number (Hex)
 case $corruptc in
 [Yy]* ) 
 while true; do
-read -p  "$(printf '\r\n\033[37mEnter the Corrupt Number [1 - 40]: \033[0m')" CORRUPTNO
+read -p  "$(printf '\r\n\033[37mEnter the Corrupt Number [1, 2, 4, 6, 8, 10, 14, 20, 30, 40]: \033[0m')" CORRUPTNO
 case $CORRUPTNO in
 "" ) 
 echo -e '\r\n\033[31mCannot be empty!\033[0m';;
@@ -295,37 +298,6 @@ break;;
 esac
 done
 
-while true; do
-read -p "$(printf '\r\n\033[37mWould you like to change the Pin Number (Hex), the default is 0x1000\r\n\033[37m(Y|N)?: \033[0m')" pinc
-case $pinc in
-[Yy]* ) 
-while true; do
-read -p  "$(printf '\r\n\033[37mEnter the Pin Number [1000 - 2000]: \033[0m')" PINNO
-case $PINNO in
-"" ) 
-echo -e '\r\n\033[31mCannot be empty!\033[0m';;
-* )  
-if grep -q '^[0-9]*$' <<<$PINNO ; then
-if [[ $((PINNO)) -lt 1000 ]] || [[ $((PINNO)) -gt 2000 ]]; then
-echo -e '\r\n\033[31mThe value must be between 1000 and 2000\033[0m';
-else 
-break;
-fi
-else 
-echo -e '\r\n\033[31mPin Number must only contain a number between 1000 and 2000\033[0m';
-fi
-esac
-done
-echo -e '\r\n\033[33mPin Number (Hex) set to 0x'$PINNO'\033[0m'
-break;;
-[Nn]* ) 
-echo -e '\r\n\033[32mUsing the default setting: 0x1000\033[0m'
-PINNO="1000"
-break;;
-* ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
-esac
-done
-
 else
 SPRAYNO="1000"
 CORRUPTNO="1"
@@ -338,19 +310,19 @@ read -p "$(printf '\r\n\033[37mWould you like to change the time delay before pp
 case $delayc in
 [Yy]* ) 
 while true; do
-read -p  "$(printf '\r\n\033[37mEnter the delay start value [0 - 15]: \033[0m')" DELAYS
+read -p  "$(printf '\r\n\033[37mEnter the delay start value [0 - 20]: \033[0m')" DELAYS
 case $DELAYS in
 "" ) 
 echo -e '\r\n\033[31mCannot be empty!\033[0m';;
 * )  
 if grep -q '^[0-9]*$' <<<$DELAYS ; then
-if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 15 ]]; then
-echo -e '\r\n\033[31mThe value must be between 0 and 15\033[0m';
+if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 20 ]]; then
+echo -e '\r\n\033[31mThe value must be between 0 and 20\033[0m';
 else 
 break;
 fi
 else 
-echo -e '\r\n\033[31mThe delay time must only contain a number between 0 and 15\033[0m';
+echo -e '\r\n\033[31mThe delay time must only contain a number between 0 and 20\033[0m';
 fi
 esac
 done
