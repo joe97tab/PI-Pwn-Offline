@@ -172,9 +172,9 @@ If incorrect pconfig setup it will use default value.
 | XFBS="0" | buffer-size, set value between 0-20480 |
 | XFNWB=true | no-wait-padi , set to false if encounter a problem |
 | For | CPPMETHOD="4" Only |
-| SPRAY_NUM="1000" | set value between 400-1500 (1000, 1050, 1100, 1150,... ) |
-| CORRUPT_NUM="1" | set value 1, 2, 4, 6, 8, 10, 14, 20, 30, 40 |
-| PIN_NUM="1000" | it's fine to leave this at default |
+| SPRAY_NUM="0x1000" | set value between 0x400-0x1500 (0x1000, 0x1050, 0x1100, 0x1150,... ) |
+| CORRUPT_NUM="0x1" | set value 0x1, 0x2, 0x4, 0x6, 0x8, 0x10, 0x14, 0x20, 0x30, 0x40 |
+| PIN_NUM="0x1000" | it's fine to leave this at default |
 
 See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github.com/nn9dev/PiPiPenetrate) for further details.
 
