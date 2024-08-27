@@ -20,7 +20,7 @@ echo -e '\033[37mMod By              : joe97tab\033[0m'
 echo -e ''
 echo -e '\r\n\033[31mPress Ctrl+C anytime to exit this script\033[0m'
 echo -e ''
-echo -e '\r\n\032[31mYou can input lowercase letter choice\033[0m'
+echo -e '\r\n\033[32mYou can input lowercase letter choice\033[0m'
 
 echo -e ''
 echo -e '\033[37m1 ) C++ V1 support old IPv6 Only (Fastest speed)\033[0m'
@@ -31,19 +31,19 @@ while true; do
 read -p "$(printf '\r\n\033[37mPlease enter your choice for C++ method (cursed PS4 should select 2 or 3\r\n\r\n\033[37m(1|2|3|4)?: \033[0m')" cppchoice
 case $cppchoice in
 [1]* )
-CPPM="v1"
+CPPM="1"
 echo -e '\r\n\033[32mC++ Version 1.0.0 for old IPv6 Only from xfangfang being used\033[0m'
 break;;
 [2]* ) 
-CPPM="stooged"
+CPPM="2"
 echo -e '\r\n\033[33mC++ from stooged complied is being used\033[0m'
 break;;
 [3]* )
-CPPM="xfangfang"
+CPPM="3"
 echo -e '\r\n\033[32mC++ Lastest from xfangfang is being used\033[0m'
 break;;
 [4]* )
-CPPM="nn9dev"
+CPPM="4"
 echo -e '\r\n\033[32mC++ from nn9dev is being used\033[0m'
 break;;
 * ) echo -e '\r\n\033[31mPlease answer 1 or 2 or 3 or 4\033[0m';;
@@ -374,9 +374,9 @@ sudo rm /boot/firmware/PPPwn/PPPwn.tar
 sudo chmod u+rwx /etc/systemd/system/pipwn.service
 sudo systemctl enable pipwn
 sudo systemctl start pipwn
-echo -e '\033[37mInstall complete\033[0m'
 echo -e ''
-echo -e '\r\n\032[31mRun : sudo poweroff : to shutdown the device\033[0m'
-echo -e '\r\n\032[31mor\033[0m' 
-echo -e '\r\n\032[31mPress Ctrl+C to stop pppwn\033[0m'
+echo -e '\033[32mInstall complete\033[0m'
+echo -e '\r\n\033[37mRun : sudo poweroff : to shutdown the device\033[0m'
+echo -e '\033[37mor\033[0m' 
+echo -e '\033[37mPress Ctrl+C to stop pppwn\033[0m'
 
