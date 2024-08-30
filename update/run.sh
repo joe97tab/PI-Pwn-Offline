@@ -7,7 +7,7 @@ if [ -f /boot/firmware/PPPwn/pconfig.sh ]; then
 source /boot/firmware/PPPwn/pconfig.sh
 fi
 
-if [ -z $CPPMETHOD ]; then CPPMETHOD="xfangfang"; fi
+if [ -z $CPPMETHOD ]; then CPPMETHOD="3"; fi
 if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
