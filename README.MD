@@ -26,7 +26,7 @@ What is benifit between normal and web server (my opinion)?
 | PPPwn success rate | better | lower |
 | Kernel panic | lower | higher |
 | Change config | pc | ps4 browser or pc |
-| Payloads loader | Payload Guest | PS4 local web page |
+| Payloads loader | Payload Guest | ps4 local web page |
 
 ---------------------------------------------------------------------------------------
 
@@ -127,9 +127,9 @@ Lastest update : 30/08/2024
 | Armbian amlogic | bookworm, s912 may not work | 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/1.0-final/aml-s9xx-pppwn-offline-v1-bookworm-final.7z) |
 | Armbian amlogic | jammy, s905x3 may not work | 2GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/1.0-final/aml-s9xx-pppwn-offline-v2-jammy-final.7z) |
 | Offline web server image | - | - | - |
-| Raspberry pi | bookworm (php8.2), up to pi5| 4GB or above | [gdrive](https://drive.google.com/file/d/1B77cpOlqDezk_ZGb8Iq76Zwk2XyXiXLm/view) |
-| Armbian amlogic | bookworm (php8.2), s912 may not work | 4GB or above | [gdrive](https://drive.google.com/file/d/1lJDEnSDJddFn1aSHEMuiIIfhtkltQSNp/view) |
-| Armbian amlogic | jammy (php8.1), s905x3 may not work | 2GB or above | [gdrive](https://drive.google.com/file/d/1mxTshlN3Tv2iloabUE5FnuMjext5IycF/view) |
+| Raspberry pi | bookworm (php8.2), up to pi5| 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/rpi-pppwn-offline-bookworm-web-server.7z) |
+| Armbian amlogic | bookworm (php8.2), s912 may not work | 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/aml-s9xx-pppwn-offline-bookworm-web-server.7z) |
+| Armbian amlogic | jammy (php8.1), s905x3 may not work | 2GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/aml-s9xx-pppwn-offline-jammy-web-server.7z) |
 
 If you see "Ready for console connection" it means your device ready for pppwn, please update the lastest script in the section `How to update`.
 
@@ -137,7 +137,16 @@ If you see "Ready for console connection" it means your device ready for pppwn, 
 
 ## How to update
 
-- At PC, Insert SDCARD, copy and replace files `/update/run.sh`, `/update/run_web.sh` and `/PPPwn/PPPwn.tar` to your /PPPwn/ folder.
+- At PC, Insert SDCARD.
+
+- Web server version
+
+Copy and replace files `/update/run_web.sh` and `/PPPwn/PPPwn.tar` to your /PPPwn/ folder.
+
+- Normal version
+
+Copy and replace files `/update/run.sh` and `/PPPwn/PPPwn.tar` to your /PPPwn/ folder.
+
 - Power your device, it will auto update and reconfig from previous setup then continue pwn PS4 (no need to reboot).
 - If GoldHEN avialable it will auto switch from HEN to GoldHEN.
 - If something go wrong, check config.sh and pconfig.sh, use notepad++ to edit your desire value.
@@ -160,7 +169,7 @@ Config file location : SDCARD/firmware/PPPwn/ (new rasbian distro SDCARD/PPPwn)
 | STAGE2METHOD="goldhen" | goldhen, hen, bestpig (10.50 Only) and flow |
 | NEWIPV6=false | false = using old IPv6 (faster), true = for cursed ps4 |
 | DELAYSTART="0" | delay time before pppwn start, set value between 0-20 seconds |
-| for | web server version |
+| For web server version | - |
 | SHUTDOWN=false | if enabled this will make the device shutdown after pppwn succeeds |
 | PPPOECONN=true | web server setting, only way to enable it if you accidently disabled in ps4 browser |
 | PWNAUTORUN=true | set to false if you want manually pwn with ps4 web browser |
@@ -177,7 +186,7 @@ Nn9dev binary (CPPMETHOD="4") added new feature it added spray number, corrupt n
 
 | CPPMETHOD | 1 | 2 | 3 | 4 |
 | --- | --- | --- | --- | --- |
-| Binary | v1 | stooged | xfangfang | nn9dev |
+| Binary | v1.0.0 xfangfang | stooged | lastest xfangfang | nn9dev |
 | Old IPv6 | o | o | o | o |
 | New IPv6 | x | o | o | o |
 | wait-after-pin | x | o | o | o |
@@ -205,7 +214,7 @@ If incorrect pconfig setup it will use default value.
 | XFGD="4" | groom-delay, set value between 1-4097 ms |
 | XFBS="0" | buffer-size, set value between 0-20480 |
 | XFNWB=true | no-wait-padi , set to false if encounter a problem |
-| For | CPPMETHOD="4" Only |
+| For CPPMETHOD="4" | - |
 | SPRAY_NUM="1000" | set value between 400-1500 (1000, 1050, 1100, 1150,... ) |
 | CORRUPT_NUM="1" | set value 1, 2, 4, 6, 8, 10, 14, 20, 30, 40 |
 | PIN_NUM="1000" | it's fine to leave this at default |
@@ -251,7 +260,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 - no-wait-padi, can reduces pwn time but may miss captured package.
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
-- `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device.
+- `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device (for normal version).
 - `CPPMETHOD="4"` My PS4 (not cursed) crashed a lot when set NEWIPV6 to false, use this method if you can't pwn your PS4.
 
 ---------------------------------------------------------------------------------------
