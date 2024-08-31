@@ -9,8 +9,6 @@ Test on PS4 Slim FW 10.50.
 
 It can use with raspberry pi, armbian devices and some linux system.
 
-Raspberry pi worked better and more stable than armbian tv box, if you can find old pi 2,3 for a good deal please take it. 
-
 For normal version : no need to install additional software, no root required.
 
 For web server version : need pppoe, nginx and php-fpm 8.1 up (8.2 recommend), it requires to connect to internet for installation the package, use my pre-built image make it easier.
