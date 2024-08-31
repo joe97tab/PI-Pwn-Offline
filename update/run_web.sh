@@ -15,11 +15,10 @@ if [ -z $STAGE2METHOD ]; then STAGE2METHOD="flow"; fi
 if [ -z $NEWIPV6 ]; then NEWIPV6=true; fi
 if [ -z $DELAYSTART ]; then DELAYSTART="0"; fi
 
-if [ -z $SHUTDOWN ]; then SHUTDOWN=false; fi
 if [ -z $PPPOECONN ]; then PPPOECONN=true; fi
 if [ -z $PWNAUTORUN ]; then PWNAUTORUN=false; fi
 if [ -z $TIMEOUT ]; then TIMEOUT="5m"; fi
-if [ -z $PPDBG ]; then PPDBG=true; fi
+if [ -z $PPDBG ]; then PPDBG=false; fi
 
 if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
@@ -51,7 +50,6 @@ USBETHERNET='$USBETHERNET'
 STAGE2METHOD="'${STAGE2METHOD/ /}'"
 NEWIPV6='$NEWIPV6'
 DELAYSTART="'${DELAYSTART/ /}'"
-SHUTDOWN='$SHUTDOWN'
 PPPOECONN='$PPPOECONN'
 PWNAUTORUN='$PWNAUTORUN'
 TIMEOUT="'${TIMEOUT/ /}'"

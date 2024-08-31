@@ -10,7 +10,7 @@ exit 1
 fi
 
 echo -e ''
-echo -e '\033[37mPPPwn PS4 Jailbreak : Offline Mode, Auto Shutdown and C++\033[0m'
+echo -e '\033[37mPPPwn PS4 Jailbreak : Offline Mode, C++ and Web Server\033[0m'
 echo -e '\033[37mPPPwn by            : FloW\033[0m'
 echo -e '\033[37mGoldhen by          : SiSTR0\033[0m'
 echo -e '\033[37mHen by              : EchoStretch and BestPig\033[0m'
@@ -54,13 +54,11 @@ read -p "$(printf '\r\n\033[37mDo you want to using web server?\r\n\033[37m(Y|N)
 case $useweb in
 [Yy]* ) 
 USEWEB="true"
-SHTDN="false"
 echo -e '\r\n\033[33mWeb server enabled at 192.168.2.1\033[0m'
 echo -e '\033[33mPlease set pppoe user : ppp, password : ppp at PS4 network setting\033[0m'
 break;;
 [Nn]* )
 USEWEB="false"
-SHTDN="true"
 echo -e '\r\n\033[32mWeb server disable (faster pwn speed)\033[0m'
 break;;
 * ) echo -e '\033[31mPlease answer Y or N\033[0m';;
@@ -347,11 +345,10 @@ USBETHERNET='$USBE'
 STAGE2METHOD="'${S2METHOD/ /}'"
 NEWIPV6='$IPV6STATE'
 DELAYSTART="'${DELAYS/ /}'"
-SHUTDOWN='$SHTDN'
 PPPOECONN='$USEWEB'
 PWNAUTORUN=false
 TIMEOUT="5m"
-PPDBG=true' | sudo tee /boot/firmware/PPPwn/config.sh
+PPDBG=false' | sudo tee /boot/firmware/PPPwn/config.sh
 
 # create pppwn c++ config
 echo '#!/bin/bash

@@ -168,13 +168,13 @@ Config file location : SDCARD/firmware/PPPwn/ (new rasbian distro SDCARD/PPPwn)
 | NEWIPV6=false | false = using old IPv6 (faster), true = for cursed ps4 |
 | DELAYSTART="0" | delay time before pppwn start, set value between 0-20 seconds |
 | For web server version | - |
-| SHUTDOWN=false | if enabled this will make the device shutdown after pppwn succeeds |
-| PPPOECONN=true | web server setting, only way to enable it if you accidently disabled in ps4 browser |
+| PPPOECONN=true | only way to enable it if you accidently disabled in ps4 browser, set to false will enable auto shutdown and auto pwn |
 | PWNAUTORUN=true | set to false if you want manually pwn with ps4 web browser |
 | TIMEOUT="5m" | a timeout in minutes to restart pppwn if the exploit hangs mid process |
-| PPDBG=true | enables debug output from pppwn so you can see the result after exploited |
+| PPDBG=false | enables debug output from pppwn so you can see the result after exploited |
 
-`DELAYSTART` uses for adjust your device to ready for pppwn after ps4 finish boot to home screen. 
+`DELAYSTART` uses for adjust your device to ready for pppwn after ps4 finish boot to home screen.
+`PPDBG` should set to false, it will cause slow down on pwn process if enable it.
 
 `CPPMETHOD` If incorrect cpp setup it will use lastest xfangfang binary.
 
@@ -258,7 +258,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 - no-wait-padi, can reduces pwn time but may miss captured package.
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
-- `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device (for normal version).
+- `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device (if not using web server).
 - `CPPMETHOD="4"` My PS4 (not cursed) crashed a lot when set NEWIPV6 to false, use this method if you can't pwn your PS4.
 
 ---------------------------------------------------------------------------------------
