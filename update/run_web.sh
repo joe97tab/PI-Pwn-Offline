@@ -30,8 +30,14 @@ if [ -z $PIN_NUM ]; then PIN_NUM="1000"; fi
 
 sudo mkdir /boot/firmware/update/
 sudo mv /boot/firmware/PPPwn/PPPwn.tar /boot/firmware/update/PPPwn.tar
+if [ -f /boot/firmware/PPPwn/pppoelogin.txt ]; then
+sudo mv /boot/firmware/PPPwn/pppoelogin.txt /boot/firmware/update/pppoelogin.txt
+fi
 sudo rm -rf /boot/firmware/PPPwn/
 sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/
+if [ -f /boot/firmware/update/pppoelogin.txt ]; then
+sudo mv /boot/firmware/update/pppoelogin.txt /boot/firmware/PPPwn/pppoelogin.txt
+fi
 sudo chmod 777 /boot/firmware/PPPwn/*.*
 sudo rm -rf /boot/firmware/update/
 

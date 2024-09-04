@@ -174,6 +174,7 @@ Config file location : SDCARD/firmware/PPPwn/ (new rasbian distro SDCARD/PPPwn)
 | PPDBG=false | enables debug output from pppwn so you can see the result after exploited |
 
 `DELAYSTART` uses for adjust your device to ready for pppwn after ps4 finish boot to home screen.
+
 `PPDBG` should set to false, it will cause slow down on pwn process if enable it.
 
 `CPPMETHOD` If incorrect cpp setup it will use lastest xfangfang binary.
@@ -256,6 +257,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 - HEN is enough if you only run homebrew or fpkg game, no need to using GoldHEN, firmware lower the better.
 - HEN now supports [Payload Guest](https://github.com/Al-Azif/ps4-payload-guest/releases), put [payloads](https://github.com/TheWizWikii/All-PS4-Payloads) that match your FW in USB/payloads/ or PS4HDD/data/payloads/.
 - no-wait-padi, can reduces pwn time but may miss captured package.
+- Change PPPoE username and password to one letter may improve the pwn success rate.
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
 - `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device (if not using web server).
