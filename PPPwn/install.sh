@@ -192,7 +192,7 @@ break;;
 esac
 done
 
-if [[ $CPPM == "v1" ]] ;then
+if [[ $CPPM == "1" ]] ;then
 IPV6STATE="false"
 WNPSTATE="true"
 SPRAYNO="1000"

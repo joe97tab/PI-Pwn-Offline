@@ -235,7 +235,7 @@ break;;
 esac
 done
 
-if [[ $CPPM == "v1" ]] ;then
+if [[ $CPPM == "1" ]] ;then
 IPV6STATE="false"
 else
 echo -e '\r\n\033[37mNew IPv6 slower than old IPv6, no need to using new IPv6 if pwn work\033[0m'
@@ -286,21 +286,30 @@ break;;
 esac
 done
 
+HSTN="pppwn"
+CHSTN=$(hostname | cut -f1 -d' ')
+sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hosts
+sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hostname
+sudo sed -i "/^dns=.*/d" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "/^rc-manager=.*/d" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "2i dns=none" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "3i rc-manager=unmanaged" /etc/NetworkManager/NetworkManager.conf
+echo 'nameserver 192.168.2.1
+nameserver 127.0.0.1' | sudo tee /etc/resolv.conf.manually-configured
+sudo rm /etc/resolv.conf
+sudo ln -s /etc/resolv.conf.manually-configured /etc/resolv.conf
+sudo systemctl restart network-manager
+
 echo 'auth
 lcp-echo-failure 3
 lcp-echo-interval 60
 mtu 1482
 mru 1482
-require-pap
+noauth
 ms-dns 192.168.2.1
 netmask 255.255.255.0
 defaultroute
-noipdefault
-usepeerdns' | sudo tee /etc/ppp/pppoe-server-options
-
-PPPU="ppp"
-PPPW="ppp"
-echo '"'$PPPU'"  *  "'$PPPW'"  192.168.2.2' | sudo tee /etc/ppp/pap-secrets
+noipdefault' | sudo tee /etc/ppp/pppoe-server-options
 
 PHPVER=$(sudo php -v | head -n 1 | cut -d " " -f 2 | cut -f1-2 -d".")
 echo 'server {

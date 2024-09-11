@@ -30,16 +30,37 @@ if [ -z $PIN_NUM ]; then PIN_NUM="1000"; fi
 
 sudo mkdir /boot/firmware/update/
 sudo mv /boot/firmware/PPPwn/PPPwn.tar /boot/firmware/update/PPPwn.tar
-if [ -f /boot/firmware/PPPwn/pppoelogin.txt ]; then
-sudo mv /boot/firmware/PPPwn/pppoelogin.txt /boot/firmware/update/pppoelogin.txt
-fi
 sudo rm -rf /boot/firmware/PPPwn/
 sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/
-if [ -f /boot/firmware/update/pppoelogin.txt ]; then
-sudo mv /boot/firmware/update/pppoelogin.txt /boot/firmware/PPPwn/pppoelogin.txt
-fi
 sudo chmod 777 /boot/firmware/PPPwn/*.*
 sudo rm -rf /boot/firmware/update/
+
+echo 'auth
+lcp-echo-failure 3
+lcp-echo-interval 60
+mtu 1482
+mru 1482
+noauth
+ms-dns 192.168.2.1
+netmask 255.255.255.0
+defaultroute
+noipdefault' | sudo tee /etc/ppp/pppoe-server-options
+
+#change host name
+HSTN="pppwn"
+CHSTN=$(hostname | cut -f1 -d' ')
+sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hosts
+sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hostname
+#disable dns
+sudo sed -i "/^dns=.*/d" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "/^rc-manager=.*/d" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "2i dns=none" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "3i rc-manager=unmanaged" /etc/NetworkManager/NetworkManager.conf
+echo 'nameserver 192.168.2.1
+nameserver 127.0.0.1' | sudo tee /etc/resolv.conf.manually-configured
+sudo rm /etc/resolv.conf
+sudo ln -s /etc/resolv.conf.manually-configured /etc/resolv.conf
+sudo systemctl restart network-manager
 
 if [[ ${STAGE2METHOD,,} == "hen" ]] || [[ ${STAGE2METHOD,,} == *"vtx"* ]] ;then
 if [ -f /boot/firmware/PPPwn/stage2/goldhen/stage2_${FIRMWAREVERSION//.}.bin ] ; then
