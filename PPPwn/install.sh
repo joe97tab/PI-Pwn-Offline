@@ -23,6 +23,58 @@ echo -e ''
 echo -e '\r\n\033[32mYou can input lowercase letter choice\033[0m'
 
 echo -e ''
+echo -e '\033[37mDo you want to disable some process, it will increase boot time and system performance\033[0m'
+echo -e '\033[37m1 ) For raspbian distro (raspberry pi)\033[0m'
+echo -e '\033[37m2 ) For armbian distro (tvbox)\033[0m'
+echo -e '\033[37m3 ) Not disable\033[0m'
+while true; do
+read -p "$(printf '\r\n\033[37mPlease enter your choice\r\n\r\n\033[37m(1|2|3)?: \033[0m')" speedchoice
+case $speedchoice in
+[1]* )
+echo -e '\r\n\033[32mSpeed up raspbian installing...\033[0m'
+initial_turbo=30
+sudo systemctl disable bluetooth
+sudo systemctl disable hciuart.service
+sudo systemctl disable raspi-config
+sudo systemctl disable triggerhappy
+sudo systemctl disable apt-daily
+sudo systemctl disable apt-daily-upgrade
+sudo systemctl disable keyboard-setup
+sudo systemctl disable rsyslog
+sudo systemctl disable logrotate
+sudo systemctl disable man-db
+sudo systemctl disable avahi-daemon
+sudo systemctl disable rpi-eeprom-update
+sudo systemctl disable dphys-swapfile
+sudo chmod -x /etc/init.d/dphys-swapfile
+sudo swapoff -a
+sudo rm /var/swap 
+break;;
+[2]* ) 
+echo -e '\r\n\033[32mSpeed up armbian installing...\033[0m'
+sudo systemctl disable armbian-ramlog
+sudo systemctl disable armbian-zram-config
+sudo systemctl disable armbian-hardware-monitor
+sudo systemctl disable armbian-hardware-optimize
+sudo systemctl disable NetworkManager-wait-online
+sudo systemctl disable fake-hwclock
+sudo systemctl disable rsyslog
+sudo systemctl disable keyboard-setup
+sudo systemctl disable e2scrub_reap
+sudo systemctl disable ntp
+echo 'ENABLE=true
+MIN_SPEED=1296000
+MAX_SPEED=1510000
+GOVERNOR=performance' | sudo tee /etc/default/cpufrequtils 
+break;;
+[3]* ) 
+echo -e '\r\n\033[31mNot disable\033[0m'
+break;;
+* ) echo -e '\r\n\033[31mPlease answer 1 or 2 or 3\033[0m';;
+esac
+done
+
+echo -e ''
 echo -e '\033[37m1 ) C++ V1 support old IPv6 Only (Fastest speed)\033[0m'
 echo -e '\033[37m2 ) C++ from stooged complied\033[0m'
 echo -e '\033[37m3 ) C++ Lastest from xfangfang (Default)\033[0m'
@@ -310,23 +362,27 @@ read -p "$(printf '\r\n\033[37mWould you like to change the time delay before pp
 case $delayc in
 [Yy]* ) 
 while true; do
-read -p  "$(printf '\r\n\033[37mEnter the delay start value [0 - 20]: \033[0m')" DELAYS
+read -p  "$(printf '\r\n\033[37mEnter the delay start value [0 - 21]: \033[0m')" DELAYS
 case $DELAYS in
 "" ) 
 echo -e '\r\n\033[31mCannot be empty!\033[0m';;
 * )  
 if grep -q '^[0-9]*$' <<<$DELAYS ; then
-if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 20 ]]; then
-echo -e '\r\n\033[31mThe value must be between 0 and 20\033[0m';
+if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 21 ]]; then
+echo -e '\r\n\033[31mThe value must be between 0 and 21\033[0m';
 else 
 break;
 fi
 else 
-echo -e '\r\n\033[31mThe delay time must only contain a number between 0 and 20\033[0m';
+echo -e '\r\n\033[31mThe delay time must only contain a number between 0 and 21\033[0m';
 fi
 esac
 done
+if [[ $((DELAYS)) -eq 21 ]]; then
+echo -e '\r\n\033[33mThis will try to detect link before pwn start\033[0m'
+else
 echo -e '\r\n\033[33mDelay start set to '$DELAYS' (seconds)\033[0m'
+fi
 break;;
 [Nn]* ) 
 echo -e '\r\n\033[32mUsing the default setting: 0 (second)\033[0m'
@@ -357,6 +413,21 @@ XFNWB='$WNPSTATE'
 SPRAY_NUM="'$SPRAYNO'"
 CORRUPT_NUM="'$CORRUPTNO'"
 PIN_NUM="'$PINNO'"' | sudo tee /boot/firmware/PPPwn/pconfig.sh
+
+HSTN="pppwn"
+CHSTN=$(hostname | cut -f1 -d' ')
+sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hosts
+sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hostname
+sudo sed -i "/^dns=.*/d" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "/^rc-manager=.*/d" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "2i dns=none" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "3i rc-manager=unmanaged" /etc/NetworkManager/NetworkManager.conf
+echo '' | sudo tee /etc/resolv.conf.manually-configured
+sudo rm /etc/resolv.conf
+sudo ln -s /etc/resolv.conf.manually-configured /etc/resolv.conf
+echo '[keyfile]
+unmanaged-devices=type:wifi' | sudo tee /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
+sudo systemctl restart network-manager
 
 sudo rm /usr/lib/systemd/system/bluetooth.target
 sudo rm /usr/lib/systemd/system/network-online.target

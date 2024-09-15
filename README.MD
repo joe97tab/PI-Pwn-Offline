@@ -24,7 +24,7 @@ What is benifit between normal and web server (my opinion)?
 | PPPwn success rate | better | lower |
 | Kernel panic | lower | higher |
 | Change config | pc | ps4 browser or pc |
-| Payloads loader | Payload Guest | ps4 local web page |
+| Payloads loader | Payload Guest | local web page or Payload Guest |
 
 ---------------------------------------------------------------------------------------
 
@@ -79,24 +79,6 @@ During the install process you will be asked to set some options.
 
 It will create config.sh, pconfig.sh and auto run script for pwn PS4.
 
-### Optional : speed up the boot process.
-
-Reduced boot time and increased overall speed by disable some services.
-
-Please run this script in /tuning/ before install main pppwn script.
-
-Raspbian :
-
-```sh
-sudo bash speedup_raspbian.sh
-```
-
-Armbian :
-
-```sh
-sudo bash speedup_armbian.sh
-```
-
 Shut down and connect to ps4 and test your pppwn.
 
 On your PS4:
@@ -104,7 +86,7 @@ On your PS4:
 - Go to `Settings` and then `Network`
 - Select `Set Up Internet connection` and choose `Use a LAN Cable`
 - Choose `Custom` setup and choose `PPPoE` for `IP Address Settings`
-- Enter `ppp` for `PPPoE User ID` and `PPPoE Password`
+- Enter anything for `PPPoE User ID` and `PPPoE Password`
 - Choose `Automatic` for `DNS Settings` and `MTU Settings`
 - Choose `Do Not Use` for `Proxy Server`
 - You can access web page features at `192.168.2.1` on your PS4 browser when it's not in the pppwn process.
@@ -166,14 +148,14 @@ Config file location : SDCARD/firmware/PPPwn/ (new rasbian distro SDCARD/PPPwn)
 | USBETHERNET=false | set to true if using external usb ethernet |
 | STAGE2METHOD="goldhen" | goldhen, hen, bestpig (10.50 Only) and flow |
 | NEWIPV6=false | false = using old IPv6 (faster), true = for cursed ps4 |
-| DELAYSTART="0" | delay time before pppwn start, set value between 0-20 seconds |
+| DELAYSTART="21" | delay time before pppwn start, set value between 0-20 seconds |
 | For web server version | - |
 | PPPOECONN=true | only way to enable it if you accidently disabled in ps4 browser, set to false will enable auto shutdown and auto pwn |
 | PWNAUTORUN=true | set to false if you want manually pwn with ps4 web browser |
 | TIMEOUT="5m" | a timeout in minutes to restart pppwn if the exploit hangs mid process |
 | PPDBG=false | enables debug output from pppwn so you can see the result after exploited |
 
-`DELAYSTART` uses for adjust your device to ready for pppwn after ps4 finish boot to home screen.
+`DELAYSTART` uses for adjust your device to ready for pppwn after ps4 finish boot to home screen. If set value exceed 20 (`DELAYSTART="21"`) it will trying to detect link before pwn, not accurate detection but should try this option first.
 
 `PPDBG` should set to false, it will cause slow down on pwn process if enable it.
 
@@ -181,7 +163,7 @@ Config file location : SDCARD/firmware/PPPwn/ (new rasbian distro SDCARD/PPPwn)
 
 Stooged binary (CPPMETHOD="2") had intregrated stage1, stage2 and hen-vtx into the binary, for hen-vtx, no need to place payload.bin onto the root of a usb drive.
 
-Nn9dev binary (CPPMETHOD="4") added new feature it added spray number, corrupt number and pin number, it hopes to improve stability.
+Nn9dev binary (CPPMETHOD="4") added new feature it added spray number, corrupt number and pin number.
 
 | CPPMETHOD | 1 | 2 | 3 | 4 |
 | --- | --- | --- | --- | --- |
@@ -261,7 +243,7 @@ See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github
 - When pwn the console don't touch anything it will increase the success rate.
 - `Cannot connect to network: (NW-31274-7).` It means the program try to injection, sometime the exploit fails or the PS4 crashes.
 - `LAN cable not connected.` It means the program will try next attempt, if pwn success it turns off Ethernet interface and shutdown the device (if not using web server).
-- `CPPMETHOD="4"` My PS4 (not cursed) crashed a lot when set NEWIPV6 to false, use this method if you can't pwn your PS4.
+- `CPPMETHOD="4"` My PS4 (not cursed) crashed a lot when set NEWIPV6 to false, NEWIPV6=true and Corrupt Number=10 worked great.
 
 ---------------------------------------------------------------------------------------
 

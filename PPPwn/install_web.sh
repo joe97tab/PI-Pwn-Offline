@@ -22,6 +22,58 @@ echo -e '\r\n\033[31mPress Ctrl+C anytime to exit this script\033[0m'
 echo -e ''
 echo -e '\r\n\033[32mYou can input lowercase letter choice\033[0m'
 
+echo -e ''
+echo -e '\033[37mDo you want to disable some process, it will increase boot time and system performance\033[0m'
+echo -e '\033[37m1 ) For raspbian distro (raspberry pi)\033[0m'
+echo -e '\033[37m2 ) For armbian distro (tvbox)\033[0m'
+echo -e '\033[37m3 ) Not disable\033[0m'
+while true; do
+read -p "$(printf '\r\n\033[37mPlease enter your choice\r\n\r\n\033[37m(1|2|3)?: \033[0m')" speedchoice
+case $speedchoice in
+[1]* )
+echo -e '\r\n\033[32mSpeed up raspbian installing...\033[0m'
+initial_turbo=30
+sudo systemctl disable bluetooth
+sudo systemctl disable hciuart.service
+sudo systemctl disable raspi-config
+sudo systemctl disable triggerhappy
+sudo systemctl disable apt-daily
+sudo systemctl disable apt-daily-upgrade
+sudo systemctl disable keyboard-setup
+sudo systemctl disable rsyslog
+sudo systemctl disable logrotate
+sudo systemctl disable man-db
+sudo systemctl disable avahi-daemon
+sudo systemctl disable rpi-eeprom-update
+sudo systemctl disable dphys-swapfile
+sudo chmod -x /etc/init.d/dphys-swapfile
+sudo swapoff -a
+sudo rm /var/swap 
+break;;
+[2]* ) 
+echo -e '\r\n\033[32mSpeed up armbian installing...\033[0m'
+sudo systemctl disable armbian-ramlog
+sudo systemctl disable armbian-zram-config
+sudo systemctl disable armbian-hardware-monitor
+sudo systemctl disable armbian-hardware-optimize
+sudo systemctl disable NetworkManager-wait-online
+sudo systemctl disable fake-hwclock
+sudo systemctl disable rsyslog
+sudo systemctl disable keyboard-setup
+sudo systemctl disable e2scrub_reap
+sudo systemctl disable ntp
+echo 'ENABLE=true
+MIN_SPEED=1296000
+MAX_SPEED=1510000
+GOVERNOR=performance' | sudo tee /etc/default/cpufrequtils 
+break;;
+[3]* ) 
+echo -e '\r\n\033[31mNot disable\033[0m'
+break;;
+* ) echo -e '\r\n\033[31mPlease answer 1 or 2 or 3\033[0m';;
+esac
+done
+
 echo -e '\r\n\033[33mWeb server need pppoe, nginx and php-fpm package (8.1 up)\033[0m'
 echo -e '\033[33mConnect to internet and install with this command :\033[0m'
 echo -e '\033[32msudo apt install update\033[0m'
@@ -55,7 +107,6 @@ case $useweb in
 [Yy]* ) 
 USEWEB="true"
 echo -e '\r\n\033[33mWeb server enabled at 192.168.2.1\033[0m'
-echo -e '\033[33mPlease set pppoe user : ppp, password : ppp at PS4 network setting\033[0m'
 break;;
 [Nn]* )
 USEWEB="false"
@@ -260,23 +311,27 @@ read -p "$(printf '\r\n\033[37mWould you like to change the time delay before pp
 case $delayc in
 [Yy]* ) 
 while true; do
-read -p  "$(printf '\r\n\033[37mEnter the delay start value [0 - 20]: \033[0m')" DELAYS
+read -p  "$(printf '\r\n\033[37mEnter the delay start value [0 - 21]: \033[0m')" DELAYS
 case $DELAYS in
 "" ) 
 echo -e '\r\n\033[31mCannot be empty!\033[0m';;
 * )  
 if grep -q '^[0-9]*$' <<<$DELAYS ; then
-if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 20 ]]; then
-echo -e '\r\n\033[31mThe value must be between 0 and 20\033[0m';
+if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 21 ]]; then
+echo -e '\r\n\033[31mThe value must be between 0 and 21\033[0m';
 else 
 break;
 fi
 else 
-echo -e '\r\n\033[31mThe delay time must only contain a number between 0 and 20\033[0m';
+echo -e '\r\n\033[31mThe delay time must only contain a number between 0 and 21\033[0m';
 fi
 esac
 done
+if [[ $((DELAYS)) -eq 21 ]]; then
+echo -e '\r\n\033[33mThis will try to detect link before pwn start\033[0m'
+else
 echo -e '\r\n\033[33mDelay start set to '$DELAYS' (seconds)\033[0m'
+fi
 break;;
 [Nn]* ) 
 echo -e '\r\n\033[32mUsing the default setting: 0 (second)\033[0m'
@@ -298,6 +353,8 @@ echo 'nameserver 192.168.2.1
 nameserver 127.0.0.1' | sudo tee /etc/resolv.conf.manually-configured
 sudo rm /etc/resolv.conf
 sudo ln -s /etc/resolv.conf.manually-configured /etc/resolv.conf
+echo '[keyfile]
+unmanaged-devices=type:wifi' | sudo tee /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
 sudo systemctl restart network-manager
 
 echo 'auth
@@ -309,7 +366,11 @@ noauth
 ms-dns 192.168.2.1
 netmask 255.255.255.0
 defaultroute
-noipdefault' | sudo tee /etc/ppp/pppoe-server-options
+proxyarp
+noipx
+novj
+nobsdcomp
+noccp' | sudo tee /etc/ppp/pppoe-server-options
 
 PHPVER=$(sudo php -v | head -n 1 | cut -d " " -f 2 | cut -f1-2 -d".")
 echo 'server {

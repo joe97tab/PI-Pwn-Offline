@@ -34,6 +34,21 @@ sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/
 sudo chmod 777 /boot/firmware/PPPwn/*.*
 sudo rm -rf /boot/firmware/update/
 
+HSTN="pppwn"
+CHSTN=$(hostname | cut -f1 -d' ')
+sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hosts
+sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hostname
+sudo sed -i "/^dns=.*/d" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "/^rc-manager=.*/d" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "2i dns=none" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "3i rc-manager=unmanaged" /etc/NetworkManager/NetworkManager.conf
+echo '' | sudo tee /etc/resolv.conf.manually-configured
+sudo rm /etc/resolv.conf
+sudo ln -s /etc/resolv.conf.manually-configured /etc/resolv.conf
+echo '[keyfile]
+unmanaged-devices=type:wifi' | sudo tee /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
+sudo systemctl restart network-manager
+
 if [[ ${STAGE2METHOD,,} == "hen" ]] || [[ ${STAGE2METHOD,,} == *"vtx"* ]] ;then
 if [ -f /boot/firmware/PPPwn/stage2/goldhen/stage2_${FIRMWAREVERSION//.}.bin ] ; then
 STAGE2METHOD="goldhen"
