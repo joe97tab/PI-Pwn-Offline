@@ -148,14 +148,14 @@ Config file location : SDCARD/firmware/PPPwn/ (new rasbian distro SDCARD/PPPwn)
 | USBETHERNET=false | set to true if using external usb ethernet |
 | STAGE2METHOD="goldhen" | goldhen, hen, bestpig (10.50 Only) and flow |
 | NEWIPV6=false | false = using old IPv6 (faster), true = for cursed ps4 |
-| DELAYSTART="21" | delay time before pppwn start, set value between 0-20 seconds |
+| DETECTMODE="1" | 0 = Disable, 1 = PS4 Power on, 2 = GoldHEN, 3 = Both |
 | For web server version | - |
 | PPPOECONN=true | only way to enable it if you accidently disabled in ps4 browser, set to false will enable auto shutdown and auto pwn |
 | PWNAUTORUN=true | set to false if you want manually pwn with ps4 web browser |
 | TIMEOUT="5m" | a timeout in minutes to restart pppwn if the exploit hangs mid process |
 | PPDBG=false | enables debug output from pppwn so you can see the result after exploited |
 
-`DELAYSTART` uses for adjust your device to ready for pppwn after ps4 finish boot to home screen. If set value exceed 20 (`DELAYSTART="21"`) it will trying to detect link before pwn, not accurate detection but should try this option first.
+`DETECTMODE` 1 = Wait PS4 ready for pwn, useful when the device uses separate power, 2 = useful for rest mode but required addition time to check.
 
 `PPDBG` should set to false, it will cause slow down on pwn process if enable it.
 
@@ -196,8 +196,8 @@ If incorrect pconfig setup it will use default value.
 | XFBS="0" | buffer-size, set value between 0-20480 |
 | XFNWB=true | no-wait-padi , set to false if encounter a problem |
 | For CPPMETHOD="4" | - |
-| SPRAY_NUM="1000" | set value between 400-1500 (1000, 1050, 1100, 1150,... ) |
-| CORRUPT_NUM="1" | set value 1, 2, 4, 6, 8, 10, 14, 20, 30, 40 |
+| SPRAY_NUM="1000" | set hex value between 400-1500 (1000, 1050, 1100, 1150,... ) |
+| CORRUPT_NUM="10" | set hex value 1, 2, 4, 6, 8, 10, 14, 20, 30, 40 |
 | PIN_NUM="1000" | it's fine to leave this at default |
 
 See [xfangfang](https://github.com/xfangfang/PPPwn_cpp), [nn9dev](https://github.com/nn9dev/PiPiPenetrate) for further details.

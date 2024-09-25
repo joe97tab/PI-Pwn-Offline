@@ -13,7 +13,7 @@ if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
 if [ -z $STAGE2METHOD ]; then STAGE2METHOD="flow"; fi
 if [ -z $NEWIPV6 ]; then NEWIPV6=true; fi
-if [ -z $DELAYSTART ]; then DELAYSTART="0"; fi
+if [ -z $DETECTMODE ]; then DETECTMODE="1"; fi
 
 if [ -z $PPPOECONN ]; then PPPOECONN=true; fi
 if [ -z $PWNAUTORUN ]; then PWNAUTORUN=false; fi
@@ -44,7 +44,11 @@ noauth
 ms-dns 192.168.2.1
 netmask 255.255.255.0
 defaultroute
-noipdefault' | sudo tee /etc/ppp/pppoe-server-options
+proxyarp
+noipx
+novj
+nobsdcomp
+noccp' | sudo tee /etc/ppp/pppoe-server-options
 
 HSTN="pppwn"
 CHSTN=$(hostname | cut -f1 -d' ')
@@ -54,12 +58,16 @@ sudo sed -i "/^dns=.*/d" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "/^rc-manager=.*/d" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "2i dns=none" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "3i rc-manager=unmanaged" /etc/NetworkManager/NetworkManager.conf
-echo 'nameserver 192.168.2.1
-nameserver 127.0.0.1' | sudo tee /etc/resolv.conf.manually-configured
+sudo sed -i "s^managed=true^managed=false^g" /etc/NetworkManager/NetworkManager.conf
+echo '' | sudo tee /etc/resolv.conf.manually-configured
 sudo rm /etc/resolv.conf
 sudo ln -s /etc/resolv.conf.manually-configured /etc/resolv.conf
 echo '[keyfile]
 unmanaged-devices=type:wifi' | sudo tee /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
+echo 'auto '$INTERFACE'
+iface '$INTERFACE' inet manual
+up ip link set '$INTERFACE' promisc on
+down ip link set '$INTERFACE' promisc off' | sudo tee /etc/network/interfaces
 sudo systemctl restart network-manager
 
 if [[ ${STAGE2METHOD,,} == "hen" ]] || [[ ${STAGE2METHOD,,} == *"vtx"* ]] ;then
@@ -76,7 +84,7 @@ FIRMWAREVERSION="'${FIRMWAREVERSION/ /}'"
 USBETHERNET='$USBETHERNET'
 STAGE2METHOD="'${STAGE2METHOD/ /}'"
 NEWIPV6='$NEWIPV6'
-DELAYSTART="'${DELAYSTART/ /}'"
+DETECTMODE="'${DETECTMODE/ /}'"
 PPPOECONN='$PPPOECONN'
 PWNAUTORUN='$PWNAUTORUN'
 TIMEOUT="'${TIMEOUT/ /}'"

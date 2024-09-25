@@ -17,7 +17,7 @@ if [ -z $NEWIPV6 ]; then NEWIPV6=true; fi
 else
 NEWIPV6=$USEIPV6
 fi
-if [ -z $DELAYSTART ]; then DELAYSTART="0"; fi
+if [ -z $DETECTMODE ]; then DETECTMODE="1"; fi
 
 if [ -z $XFWAP ]; then XFWAP="1"; fi
 if [ -z $XFGD ]; then XFGD="4"; fi
@@ -42,11 +42,16 @@ sudo sed -i "/^dns=.*/d" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "/^rc-manager=.*/d" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "2i dns=none" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "3i rc-manager=unmanaged" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "s^managed=true^managed=false^g" /etc/NetworkManager/NetworkManager.conf
 echo '' | sudo tee /etc/resolv.conf.manually-configured
 sudo rm /etc/resolv.conf
 sudo ln -s /etc/resolv.conf.manually-configured /etc/resolv.conf
 echo '[keyfile]
 unmanaged-devices=type:wifi' | sudo tee /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
+echo 'auto '$INTERFACE'
+iface '$INTERFACE' inet manual
+up ip link set '$INTERFACE' promisc on
+down ip link set '$INTERFACE' promisc off' | sudo tee /etc/network/interfaces
 sudo systemctl restart network-manager
 
 if [[ ${STAGE2METHOD,,} == "hen" ]] || [[ ${STAGE2METHOD,,} == *"vtx"* ]] ;then
@@ -57,23 +62,23 @@ fi
 
 # create general config
 echo '#!/bin/bash
-CPPMETHOD="'$CPPMETHOD'"
-INTERFACE="'$INTERFACE'"
-FIRMWAREVERSION="'$FIRMWAREVERSION'"
+CPPMETHOD="'${CPPMETHOD/ /}'"
+INTERFACE="'${INTERFACE/ /}'"
+FIRMWAREVERSION="'${FIRMWAREVERSION/ /}'"
 USBETHERNET='$USBETHERNET'
-STAGE2METHOD="'$STAGE2METHOD'"
+STAGE2METHOD="'${STAGE2METHOD/ /}'"
 NEWIPV6='$NEWIPV6'
-DELAYSTART="'$DELAYSTART'"' | sudo tee /boot/firmware/PPPwn/config.sh
+DETECTMODE="'${DETECTMODE/ /}'"' | sudo tee /boot/firmware/PPPwn/config.sh
 
 # create pppwn c++ config
 echo '#!/bin/bash
-XFWAP="'$XFWAP'"
-XFGD="'$XFGD'"
-XFBS="'$XFBS'"
+XFWAP="'${XFWAP/ /}'"
+XFGD="'${XFGD/ /}'"
+XFBS="'${XFBS/ /}'"
 XFNWB='$XFNWB'
-SPRAY_NUM="'$SPRAY_NUM'"
-CORRUPT_NUM="'$CORRUPT_NUM'"
-PIN_NUM="'$PIN_NUM'"' | sudo tee /boot/firmware/PPPwn/pconfig.sh
+SPRAY_NUM="'${SPRAY_NUM/ /}'"
+CORRUPT_NUM="'${CORRUPT_NUM/ /}'"
+PIN_NUM="'${PIN_NUM/ /}'"' | sudo tee /boot/firmware/PPPwn/pconfig.sh
 
 coproc read -t 4 && wait "$!" || true
 sudo systemctl restart pipwn

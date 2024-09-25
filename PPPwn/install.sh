@@ -23,7 +23,7 @@ echo -e ''
 echo -e '\r\n\033[32mYou can input lowercase letter choice\033[0m'
 
 echo -e ''
-echo -e '\033[37mDo you want to disable some process, it will increase boot time and system performance\033[0m'
+echo -e '\033[37mDo you want to disable some process, it will reduce boot time and increase system performance\033[0m'
 echo -e '\033[37m1 ) For raspbian distro (raspberry pi)\033[0m'
 echo -e '\033[37m2 ) For armbian distro (tvbox)\033[0m'
 echo -e '\033[37m3 ) Not disable\033[0m'
@@ -31,36 +31,59 @@ while true; do
 read -p "$(printf '\r\n\033[37mPlease enter your choice\r\n\r\n\033[37m(1|2|3)?: \033[0m')" speedchoice
 case $speedchoice in
 [1]* )
-echo -e '\r\n\033[32mSpeed up raspbian installing...\033[0m'
+echo -e '\r\n\033[32mSpeed up raspbian...\033[0m'
 initial_turbo=30
+sudo systemctl stop bluetooth
 sudo systemctl disable bluetooth
+sudo systemctl stop hciuart.service
 sudo systemctl disable hciuart.service
+sudo systemctl stop raspi-config
 sudo systemctl disable raspi-config
+sudo systemctl stop triggerhappy
 sudo systemctl disable triggerhappy
+sudo systemctl stop apt-daily
 sudo systemctl disable apt-daily
+sudo systemctl stop apt-daily-upgrade
 sudo systemctl disable apt-daily-upgrade
+sudo systemctl stop keyboard-setup
 sudo systemctl disable keyboard-setup
+sudo systemctl stop rsyslog
 sudo systemctl disable rsyslog
+sudo systemctl stop logrotate
 sudo systemctl disable logrotate
+sudo systemctl stop man-db
 sudo systemctl disable man-db
+sudo systemctl stop avahi-daemon
 sudo systemctl disable avahi-daemon
+sudo systemctl stop rpi-eeprom-update
 sudo systemctl disable rpi-eeprom-update
+sudo systemctl stop dphys-swapfile
 sudo systemctl disable dphys-swapfile
 sudo chmod -x /etc/init.d/dphys-swapfile
 sudo swapoff -a
 sudo rm /var/swap 
 break;;
 [2]* ) 
-echo -e '\r\n\033[32mSpeed up armbian installing...\033[0m'
+echo -e '\r\n\033[32mSpeed up armbian...\033[0m'
+sudo systemctl stop armbian-ramlog
 sudo systemctl disable armbian-ramlog
+sudo systemctl stop armbian-zram-config
 sudo systemctl disable armbian-zram-config
+sudo systemctl stop armbian-hardware-monitor
 sudo systemctl disable armbian-hardware-monitor
+sudo systemctl stop armbian-hardware-optimize
 sudo systemctl disable armbian-hardware-optimize
+sudo systemctl stop NetworkManager-wait-online
 sudo systemctl disable NetworkManager-wait-online
+sudo systemctl stop fake-hwclock
 sudo systemctl disable fake-hwclock
+sudo systemctl stop rsyslog
 sudo systemctl disable rsyslog
+sudo systemctl stop keyboard-setup
 sudo systemctl disable keyboard-setup
+sudo systemctl stop e2scrub_reap
 sudo systemctl disable e2scrub_reap
+sudo systemctl stop ntp
 sudo systemctl disable ntp
 echo 'ENABLE=true
 MIN_SPEED=1296000
@@ -357,43 +380,6 @@ PINNO="1000"
 fi
 fi
 
-while true; do
-read -p "$(printf '\r\n\033[37mWould you like to change the time delay before pppwn to start, the default is 0 (second)\r\n\033[37m(Y|N)?: \033[0m')" delayc
-case $delayc in
-[Yy]* ) 
-while true; do
-read -p  "$(printf '\r\n\033[37mEnter the delay start value [0 - 21]: \033[0m')" DELAYS
-case $DELAYS in
-"" ) 
-echo -e '\r\n\033[31mCannot be empty!\033[0m';;
-* )  
-if grep -q '^[0-9]*$' <<<$DELAYS ; then
-if [[ $((DELAYS)) -lt 0 ]] || [[ $((DELAYS)) -gt 21 ]]; then
-echo -e '\r\n\033[31mThe value must be between 0 and 21\033[0m';
-else 
-break;
-fi
-else 
-echo -e '\r\n\033[31mThe delay time must only contain a number between 0 and 21\033[0m';
-fi
-esac
-done
-if [[ $((DELAYS)) -eq 21 ]]; then
-echo -e '\r\n\033[33mThis will try to detect link before pwn start\033[0m'
-else
-echo -e '\r\n\033[33mDelay start set to '$DELAYS' (seconds)\033[0m'
-fi
-break;;
-[Nn]* ) 
-echo -e '\r\n\033[32mUsing the default setting: 0 (second)\033[0m'
-DELAYS="0"
-break;;
-* ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
-esac
-done
-
-echo -e ''
-
 # create general config
 echo '#!/bin/bash
 CPPMETHOD="'$CPPM'"
@@ -402,7 +388,7 @@ FIRMWAREVERSION="'$FWV'"
 USBETHERNET='$USBE'
 STAGE2METHOD="'$S2METHOD'"
 NEWIPV6='$IPV6STATE'
-DELAYSTART="'$DELAYS'"' | sudo tee /boot/firmware/PPPwn/config.sh
+DETECTMODE="1"' | sudo tee /boot/firmware/PPPwn/config.sh
 
 # create pppwn c++ config
 echo '#!/bin/bash
@@ -422,11 +408,16 @@ sudo sed -i "/^dns=.*/d" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "/^rc-manager=.*/d" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "2i dns=none" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "3i rc-manager=unmanaged" /etc/NetworkManager/NetworkManager.conf
+sudo sed -i "s^managed=true^managed=false^g" /etc/NetworkManager/NetworkManager.conf
 echo '' | sudo tee /etc/resolv.conf.manually-configured
 sudo rm /etc/resolv.conf
 sudo ln -s /etc/resolv.conf.manually-configured /etc/resolv.conf
 echo '[keyfile]
 unmanaged-devices=type:wifi' | sudo tee /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
+echo 'auto '$IFCE'
+iface '$IFCE' inet manual
+up ip link set '$IFCE' promisc on
+down ip link set '$IFCE' promisc off' | sudo tee /etc/network/interfaces
 sudo systemctl restart network-manager
 
 sudo rm /usr/lib/systemd/system/bluetooth.target
