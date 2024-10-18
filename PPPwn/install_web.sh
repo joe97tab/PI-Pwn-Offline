@@ -22,10 +22,10 @@ echo -e '\r\n\033[31mPress Ctrl+C anytime to exit this script\033[0m'
 echo -e ''
 echo -e '\r\n\033[32mYou can input lowercase letter choice\033[0m'
 
-echo -e '\r\n\033[33mWeb server need pppoe, nginx, nmap and php-fpm package (8.1 up)\033[0m'
+echo -e '\r\n\033[33mWeb server need pppoe, nginx, php-fpm and nmap package (8.1 up)\033[0m'
 echo -e '\033[33mConnect to internet and install with this command :\033[0m'
 echo -e '\033[32msudo apt update\033[0m'
-echo -e '\033[32msudo apt install pppoe nginx php-fpm -y\033[0m'
+echo -e '\033[32msudo apt install pppoe nginx php-fpm nmap -y\033[0m'
 echo -e '\033[32mOr use my pre-built image\033[0m'
 
 
@@ -37,10 +37,6 @@ if [[ $(dpkg-query -W --showformat='${Status}\n' nginx|grep "install ok installe
 echo -e '\033[31mPlease install nginx (sudo apt install nginx -y)\033[0m'
 exit 1
 fi
-if [[ $(dpkg-query -W --showformat='${Status}\n' nmap|grep "install ok installed")  == "" ]] ;then
-echo -e '\033[31mPlease install nmap (sudo apt install nmap -y)\033[0m'
-exit 1
-fi
 if [[ $(dpkg-query -W --showformat='${Status}\n' php-fpm|grep "install ok installed")  == "" ]] ;then
 echo -e '\033[31mPlease install php-fpm (sudo apt install php-fpm -y)\033[0m'
 exit 1
@@ -49,6 +45,10 @@ PHPVER=$(sudo php -v | head -n 1 | cut -d " " -f 2 | cut -f1-2 -d".")
 if [[ ${PHPVER//.} -lt 81 ]]; then
 echo -e '\033[31mPhp install version : \033[33m'$PHPVER'\033[31m lowver than \033[32m8.1\033[0m'
 echo -e '\033[37mPlease use newer distro (at least bookworm, jammy) or install new php version\033[0m'
+exit 1
+fi
+if [[ $(dpkg-query -W --showformat='${Status}\n' nmap|grep "install ok installed")  == "" ]] ;then
+echo -e '\033[31mPlease install nmap (sudo apt install nmap -y)\033[0m'
 exit 1
 fi
 fi
@@ -147,7 +147,7 @@ echo -e ''
 echo -e '\033[37m1 ) C++ V1 support old IPv6 Only (Fastest speed)\033[0m'
 echo -e '\033[37m2 ) C++ from stooged complied\033[0m'
 echo -e '\033[37m3 ) C++ Lastest from xfangfang (Default)\033[0m'
-echo -e '\033[37m4 ) C++ from nn9dev (1.1b1) added spray, corrupt and pin number\033[0m'
+echo -e '\033[37m4 ) C++ from nn9dev (1.2b1) added spray, corrupt and pin number\033[0m'
 while true; do
 read -p "$(printf '\r\n\033[37mPlease enter your choice for C++ method (cursed PS4 should select 2 or 3\r\n\r\n\033[37m(1|2|3|4)?: \033[0m')" cppchoice
 case $cppchoice in
@@ -204,7 +204,7 @@ esac
 done
 
 echo -e ''
-echo -e '\033[37mA ) GoldHEN (FW 9.00, 9.60, 10.00, 10.01, 11.00)\033[0m'
+echo -e '\033[37mA ) GoldHEN (FW 9.00, 9.60, 10.00, 10.01, 10.50, 10.70, 10.71, 11.00)\033[0m'
 echo -e '\033[37mB ) HEN (FW 7.00-11.00)\033[0m'
 echo -e '\033[37mC ) TheOfficialFloW (No Homebrew Enable) (FW 7.00-11.00)\033[0m'
 echo -e '\033[37mD ) HEN by BestPig (FW 10.50 Only)\033[0m'
@@ -314,19 +314,22 @@ esac
 done
 
 if [[ $CPPM == "1" ]] ;then
-IPV6STATE="false"
+SOURCEIP="1"
+CUSTOMIP="4141:4141:4141:4141"
 else
 echo -e '\r\n\033[37mNew IPv6 slower than old IPv6, no need to using new IPv6 if pwn work\033[0m'
 while true; do
 read -p "$(printf '\r\n\033[37mAre you using new IPv6 for pwn, it will improve cursed PS4\r\n\033[37m(Y|N)?: \033[0m')" useipv
 case $useipv in
 [Yy]* ) 
-IPV6STATE="true"
+SOURCEIP="2"
+CUSTOMIP="9f9f:41ff:9f9f:41ff"
 echo -e '\r\n\033[33mNew IPv6 is being used\033[0m'
 break;;
 [Nn]* ) 
 echo -e '\r\n\033[32mOld IPv6 is being used\033[0m'
-IPV6STATE="false"
+SOURCEIP="1"
+CUSTOMIP="4141:4141:4141:4141"
 break;;
 * ) echo -e '\r\n\033[31mPlease answer Y or N\033[0m';;
 esac
@@ -409,8 +412,9 @@ INTERFACE="'${IFCE/ /}'"
 FIRMWAREVERSION="'${FWV/ /}'"
 USBETHERNET='$USBE'
 STAGE2METHOD="'${S2METHOD/ /}'"
-NEWIPV6='$IPV6STATE'
-DETECTMODE="1"
+SOURCEIPV6="'${SOURCEIP/ /}'"
+CUSTOMIPV6="'${CUSTOMIP/ /}'"
+DETECTMODE="2"
 PPPOECONN='$USEWEB'
 PWNAUTORUN=false
 TIMEOUT="5m"

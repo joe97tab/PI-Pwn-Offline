@@ -12,8 +12,9 @@ if [ -z $INTERFACE ]; then INTERFACE="eth0"; fi
 if [ -z $FIRMWAREVERSION ]; then FIRMWAREVERSION="11.00"; fi
 if [ -z $USBETHERNET ]; then USBETHERNET=false; fi
 if [ -z $STAGE2METHOD ]; then STAGE2METHOD="flow"; fi
-if [ -z $NEWIPV6 ]; then NEWIPV6=true; fi
-if [ -z $DETECTMODE ]; then DETECTMODE="1"; fi
+if [ -z $SOURCEIPV6 ]; then SOURCEIPV6="2"; fi
+if [ -z $CUSTOMIPV6 ]; then CUSTOMIPV6="9f9f:41ff:9f9f:41ff"; fi
+if [ -z $DETECTMODE ]; then DETECTMODE="2"; fi
 
 if [ -z $PPPOECONN ]; then PPPOECONN=true; fi
 if [ -z $PWNAUTORUN ]; then PWNAUTORUN=false; fi
@@ -34,6 +35,7 @@ sudo rm -rf /boot/firmware/PPPwn/
 sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/
 sudo chmod 777 /boot/firmware/PPPwn/*.*
 sudo rm -rf /boot/firmware/update/
+sudo cp /boot/firmware/PPPwn/run_web.sh /boot/firmware/misc/run_webx.sh
 
 echo 'auth
 lcp-echo-failure 3
@@ -83,7 +85,8 @@ INTERFACE="'${INTERFACE/ /}'"
 FIRMWAREVERSION="'${FIRMWAREVERSION/ /}'"
 USBETHERNET='$USBETHERNET'
 STAGE2METHOD="'${STAGE2METHOD/ /}'"
-NEWIPV6='$NEWIPV6'
+SOURCEIPV6="'${SOURCEIPV6/ /}'"
+CUSTOMIPV6="'${CUSTOMIPV6/ /}'"
 DETECTMODE="'${DETECTMODE/ /}'"
 PPPOECONN='$PPPOECONN'
 PWNAUTORUN='$PWNAUTORUN'
