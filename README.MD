@@ -107,7 +107,10 @@ Lastest update : 30/08/2024
 | Raspberry pi | buster (php7.3), up to pi4| 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/1.0-final/aml-s9xx-pppwn-offline-v1-bookworm-final.7z) |
 | Armbian amlogic | bookworm, s912 may not work | 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/1.0-final/aml-s9xx-pppwn-offline-v1-bookworm-final.7z) |
 | Armbian amlogic | jammy, s905x3 may not work | 2GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/1.0-final/aml-s9xx-pppwn-offline-v2-jammy-final.7z) |
-| Offline web server image | - | - | - |
+
+Lastest update : 30/08/2024
+
+| Offline web server image | distro | SDCARD | Download |
 | Raspberry pi | bookworm (php8.2), up to pi5| 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/rpi-pppwn-offline-bookworm-web-server.7z) |
 | Armbian amlogic | bookworm (php8.2), s912 may not work | 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/aml-s9xx-pppwn-offline-bookworm-web-server.7z) |
 | Armbian amlogic | jammy (php8.1), s905x3 may not work | 2GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/aml-s9xx-pppwn-offline-jammy-web-server.7z) |
@@ -156,8 +159,8 @@ Config file location : SDCARD/firmware/PPPwn/ (new rasbian distro SDCARD/PPPwn)
 | USBETHERNET=false | set to true if using external usb ethernet |
 | STAGE2METHOD="goldhen" | goldhen, hen, bestpig (10.50 Only) and flow |
 | SOURCEIPV6="2" | 1 = Old IPv6, 2 = New IPv6, 3 = Custom IPv6|
-| CUSTOMIPV6="" | Custom IPV6 in xxxx:xxxx:xxxx:xxxx format, SOURCEIPV6="3" |
-| DETECTMODE="1" | 1 = Disable, 2 = PS4 Power on, 3 = GoldHEN, 4 = Both |
+| CUSTOMIPV6="" | Custom IPv6 in xxxx:xxxx:xxxx:xxxx format, SOURCEIPV6="3" |
+| DETECTMODE="2" | 1 = Disable, 2 = PS4 Power on, 3 = GoldHEN, 4 = Both |
 | For web server version | - |
 | PPPOECONN=true | only way to enable it if you accidently disabled in ps4 browser, set to false will enable auto shutdown and auto pwn |
 | PWNAUTORUN=true | set to false if you want manually pwn with ps4 web browser |
@@ -177,7 +180,7 @@ Config file location : SDCARD/firmware/PPPwn/ (new rasbian distro SDCARD/PPPwn)
 | bestpig | use hen by BestPig, FW 10.50 Only |
 | flow | anything not in the above list will use TheOfficialFloW |
 
-`CUSTOMIPV6` it will used New IPv6 address if no value, incorrect format will cause ps4 shutdown.
+`CUSTOMIPV6` it will used New IPv6 address if no value, incorrect format may cause ps4 shutdown. Custom ipv6 address may add effect ps4 shutdown and start problem or cure it.
 
 | SOURCEIPV6 | Description |
 | --- | --- |
