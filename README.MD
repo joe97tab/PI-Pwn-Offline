@@ -111,6 +111,7 @@ Lastest update : 30/08/2024
 Lastest update : 30/08/2024
 
 | Offline web server image | distro | SDCARD | Download |
+| --- | --- | --- | --- |
 | Raspberry pi | bookworm (php8.2), up to pi5| 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/rpi-pppwn-offline-bookworm-web-server.7z) |
 | Armbian amlogic | bookworm (php8.2), s912 may not work | 4GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/aml-s9xx-pppwn-offline-bookworm-web-server.7z) |
 | Armbian amlogic | jammy (php8.1), s905x3 may not work | 2GB or above | [download](https://github.com/joe97tab/PI-Pwn-Offline/releases/download/2.0-beta/aml-s9xx-pppwn-offline-jammy-web-server.7z) |
