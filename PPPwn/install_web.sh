@@ -22,7 +22,7 @@ echo -e '\r\n\033[31mPress Ctrl+C anytime to exit this script\033[0m'
 echo -e ''
 echo -e '\r\n\033[32mYou can input lowercase letter choice\033[0m'
 
-echo -e '\r\n\033[33mWeb server need pppoe, nginx, php-fpm and nmap package (8.1 up)\033[0m'
+echo -e '\r\n\033[33mWeb server need pppoe, nginx, php-fpm (8.1 up) and nmap package\033[0m'
 echo -e '\033[33mConnect to internet and install with this command :\033[0m'
 echo -e '\033[32msudo apt update\033[0m'
 echo -e '\033[32msudo apt install pppoe nginx php-fpm nmap -y\033[0m'
