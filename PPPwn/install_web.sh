@@ -146,7 +146,7 @@ done
 echo -e ''
 echo -e '\033[37m1 ) C++ V1 support old IPv6 Only (Fastest speed)\033[0m'
 echo -e '\033[37m2 ) C++ from stooged complied\033[0m'
-echo -e '\033[37m3 ) C++ Lastest from xfangfang (Default)\033[0m'
+echo -e '\033[37m3 ) C++ Latest from xfangfang (Default)\033[0m'
 echo -e '\033[37m4 ) C++ from nn9dev (1.2b1) added spray, corrupt and pin number\033[0m'
 while true; do
 read -p "$(printf '\r\n\033[37mPlease enter your choice for C++ method (cursed PS4 should select 2 or 3\r\n\r\n\033[37m(1|2|3|4)?: \033[0m')" cppchoice
@@ -161,7 +161,7 @@ echo -e '\r\n\033[33mC++ from stooged complied is being used\033[0m'
 break;;
 [3]* )
 CPPM="3"
-echo -e '\r\n\033[32mC++ Lastest from xfangfang is being used\033[0m'
+echo -e '\r\n\033[32mC++ Latest from xfangfang is being used\033[0m'
 break;;
 [4]* )
 CPPM="4"
@@ -336,10 +336,6 @@ esac
 done
 fi
 
-HSTN="pppwn"
-CHSTN=$(hostname | cut -f1 -d' ')
-sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hosts
-sudo sed -i "s^$CHSTN^$HSTN^g" /etc/hostname
 sudo sed -i "/^dns=.*/d" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "/^rc-manager=.*/d" /etc/NetworkManager/NetworkManager.conf
 sudo sed -i "2i dns=none" /etc/NetworkManager/NetworkManager.conf
@@ -444,6 +440,7 @@ Environment=NODE_ENV=production
 [Install]
 WantedBy=multi-user.target' | sudo tee /etc/systemd/system/pipwn.service
 sudo rm /boot/firmware/PPPwn/PPPwn.tar
+sudo rm /boot/firmware/PPPwn/run.sh
 sudo chmod u+rwx /etc/systemd/system/pipwn.service
 sudo systemctl enable pipwn
 sudo systemctl start pipwn

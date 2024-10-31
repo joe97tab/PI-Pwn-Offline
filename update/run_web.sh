@@ -35,7 +35,10 @@ sudo rm -rf /boot/firmware/PPPwn/
 sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/
 sudo chmod 777 /boot/firmware/PPPwn/*.*
 sudo rm -rf /boot/firmware/update/
+if [ -f /boot/firmware/misc/run_web.sh ]; then
 sudo cp /boot/firmware/PPPwn/run_web.sh /boot/firmware/misc/run_webx.sh
+fi
+sudo rm /boot/firmware/PPPwn/run.sh
 
 echo 'auth
 lcp-echo-failure 3

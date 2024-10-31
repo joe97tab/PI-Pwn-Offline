@@ -30,7 +30,10 @@ sudo rm -rf /boot/firmware/PPPwn/
 sudo tar -xf /boot/firmware/update/PPPwn.tar -C /boot/firmware/
 sudo chmod 777 /boot/firmware/PPPwn/*.*
 sudo rm -rf /boot/firmware/update/
+if [ -f /boot/firmware/misc/run.sh ]; then
 sudo cp /boot/firmware/PPPwn/run.sh /boot/firmware/misc/runx.sh
+fi
+sudo rm /boot/firmware/PPPwn/run_web.sh
 
 HSTN="pppwn"
 CHSTN=$(hostname | cut -f1 -d' ')
